@@ -15,7 +15,7 @@ export default function Input({ label, error, id, className = '', ...rest }: Inp
       )}
       <input
         id={id}
-        className={`rounded-lg border px-3 py-2 text-sm outline-none transition-colors focus:border-sap-primary focus:ring-2 focus:ring-sap-primary/20 ${
+        className={`rounded-lg border bg-sap-surface px-3 py-2 text-sm text-sap-text placeholder:text-sap-text-muted outline-none transition-colors focus:border-sap-primary focus:ring-2 focus:ring-sap-primary/20 ${
           error ? 'border-sap-danger' : 'border-sap-border'
         } ${className}`}
         {...rest}

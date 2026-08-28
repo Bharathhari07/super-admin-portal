@@ -1,29 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  /* Super Admin Portal palette */
-  --color-sap-bg: #f5f7fb;
-  --color-sap-surface: #ffffff;
-  --color-sap-navy: #0f1e3d;
-  --color-sap-navy-light: #16294f;
-  --color-sap-primary: #4f46e5;
-  --color-sap-primary-dark: #4338ca;
-  --color-sap-success: #10b981;
-  --color-sap-success-bg: #e8faf3;
-  --color-sap-danger: #ef4444;
-  --color-sap-danger-bg: #fdecec;
-  --color-sap-warning: #f59e0b;
-  --color-sap-warning-bg: #fef6e7;
-  --color-sap-info: #0ea5e9;
-  --color-sap-info-bg: #e9f7fe;
-  --color-sap-text: #1f2430;
-  --color-sap-text-muted: #6b7280;
-  --color-sap-border: #e5e8ef;
+  /* Legion Ink / Black / Bright Golden Yellow - full dark theme */
+  --color-sap-bg: #0b0714;          /* page backdrop - near-black */
+  --color-sap-surface: #1c1030;     /* card/table background - dark Legion Ink */
+  --color-sap-navy: #2A1655;        /* sidebar */
+  --color-sap-navy-light: #3D2472;  /* sidebar hover */
+  --color-sap-primary: #FCE300;     /* bright golden yellow - buttons, active state */
+  --color-sap-primary-dark: #E6CE00;
+  --color-sap-primary-text: #2A1655;/* dark text on top of yellow buttons */
+  --color-sap-success: #34d399;
+  --color-sap-success-bg: rgba(52, 211, 153, 0.15);
+  --color-sap-danger: #f87171;
+  --color-sap-danger-bg: rgba(248, 113, 113, 0.15);
+  --color-sap-warning: #FCE300;     /* bright yellow reads fine on dark cards */
+  --color-sap-warning-bg: rgba(252, 227, 0, 0.12);
+  --color-sap-info: #b8a9e8;        /* soft lavender - Legion Ink tint */
+  --color-sap-info-bg: rgba(184, 169, 232, 0.15);
+  --color-sap-text: #f5f3fa;        /* near-white body text */
+  --color-sap-text-muted: #a99fc2;  /* muted lavender-gray */
+  --color-sap-border: rgba(255, 255, 255, 0.09);
 }
 
 body {
-  background-color: var(--color-sap-bg);
+  background:
+    radial-gradient(circle at 10% 20%, rgba(61, 36, 114, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(61, 36, 114, 0.3) 0%, transparent 45%),
+    var(--color-sap-bg);
   color: var(--color-sap-text);
+}
+
+/* Marbled black + Legion Ink swirl, used on the header banner */
+.sap-marble {
+  background:
+    radial-gradient(circle at 15% 25%, rgba(0, 0, 0, 0.6) 0%, transparent 40%),
+    radial-gradient(circle at 75% 15%, rgba(61, 36, 114, 0.65) 0%, transparent 45%),
+    radial-gradient(circle at 35% 85%, rgba(0, 0, 0, 0.55) 0%, transparent 50%),
+    radial-gradient(circle at 90% 75%, rgba(42, 22, 85, 0.75) 0%, transparent 45%),
+    linear-gradient(135deg, #0b0714 0%, #2A1655 50%, #120a24 100%);
+  background-blend-mode: screen, screen, screen, screen, normal;
 }
 
 /* Scrollbar polish for tables */
@@ -32,6 +47,6 @@ body {
   width: 8px;
 }
 .sap-scroll::-webkit-scrollbar-thumb {
-  background-color: #cbd2e0;
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
 }

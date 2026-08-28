@@ -21,7 +21,15 @@ export default function TenantGrowthChart() {
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e8ef" />
               <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#6b7280" />
               <YAxis tick={{ fontSize: 12 }} stroke="#6b7280" />
-              <Tooltip />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#FCE300',
+                  border: 'none',
+                  borderRadius: 8,
+                }}
+                labelStyle={{ color: '#2A1655', fontWeight: 600 }}
+                itemStyle={{ color: '#2A1655' }}
+              />
               <Line type="monotone" dataKey="tenants" stroke="#4f46e5" strokeWidth={2} dot={{ r: 3 }} />
             </LineChart>
           </ResponsiveContainer>

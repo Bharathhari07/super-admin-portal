@@ -14,7 +14,7 @@ export default function Modal({ open, title, onClose, children, widthClass = 'ma
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className={`w-full ${widthClass} rounded-xl bg-white shadow-xl`}>
+      <div className={`w-full ${widthClass} rounded-xl bg-sap-surface shadow-xl`}>
         <div className="flex items-center justify-between border-b border-sap-border px-5 py-4">
           <h2 className="text-base font-semibold text-sap-text">{title}</h2>
           <button
