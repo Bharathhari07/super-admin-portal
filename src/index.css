@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  /* Super Admin Portal palette */
+  --color-sap-bg: #f5f7fb;
+  --color-sap-surface: #ffffff;
+  --color-sap-navy: #0f1e3d;
+  --color-sap-navy-light: #16294f;
+  --color-sap-primary: #4f46e5;
+  --color-sap-primary-dark: #4338ca;
+  --color-sap-success: #10b981;
+  --color-sap-success-bg: #e8faf3;
+  --color-sap-danger: #ef4444;
+  --color-sap-danger-bg: #fdecec;
+  --color-sap-warning: #f59e0b;
+  --color-sap-warning-bg: #fef6e7;
+  --color-sap-info: #0ea5e9;
+  --color-sap-info-bg: #e9f7fe;
+  --color-sap-text: #1f2430;
+  --color-sap-text-muted: #6b7280;
+  --color-sap-border: #e5e8ef;
+}
+
+body {
+  background-color: var(--color-sap-bg);
+  color: var(--color-sap-text);
+}
+
+/* Scrollbar polish for tables */
+.sap-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.sap-scroll::-webkit-scrollbar-thumb {
+  background-color: #cbd2e0;
+  border-radius: 9999px;
+}
