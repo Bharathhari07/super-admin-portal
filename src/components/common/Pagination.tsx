@@ -14,7 +14,7 @@ export default function Pagination({ page, pageSize, total, onPageChange }: Pagi
   const end = Math.min(page * pageSize, total)
 
   return (
-    <div className="flex flex-col items-center justify-between gap-3 border-t border-sap-border px-4 py-3 sm:flex-row">
+    <div className="flex flex-col items-center justify-center gap-3 border-t border-sap-border px-4 py-3 text-center">
       <p className="text-sm text-sap-text-muted">
         Showing <span className="font-medium text-sap-text">{start}</span>-
         <span className="font-medium text-sap-text">{end}</span> of{' '}

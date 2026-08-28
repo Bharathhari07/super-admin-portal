@@ -21,7 +21,7 @@ export default function TenantFilters({
   onSortChange,
 }: TenantFiltersProps) {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
       <Select
         aria-label="Filter by status"
         value={status}
@@ -45,6 +45,7 @@ export default function TenantFilters({
       />
       <Select
         aria-label="Sort tenants"
+        className="col-span-2 sm:col-span-1"
         value={`${sortBy}:${sortDir}`}
         onChange={(e) => {
           const [nextSortBy, nextSortDir] = e.target.value.split(':') as [

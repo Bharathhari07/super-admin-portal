@@ -88,7 +88,7 @@ export default function TenantManagementPage() {
       </div>
 
       <div className="rounded-xl border border-sap-border bg-sap-surface p-4 shadow-sm">
-        <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+        <div className="mb-4 flex flex-col justify-between gap-3 xl:flex-row xl:items-center">
           <TenantSearchBar value={search} onChange={handleSearchChange} />
           <TenantFilters
             status={status}
