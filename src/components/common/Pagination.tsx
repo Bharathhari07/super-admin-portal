@@ -6,9 +6,10 @@ interface PaginationProps {
   pageSize: number
   total: number
   onPageChange: (page: number) => void
+  itemLabel?: string
 }
 
-export default function Pagination({ page, pageSize, total, onPageChange }: PaginationProps) {
+export default function Pagination({ page, pageSize, total, onPageChange, itemLabel = 'items' }: PaginationProps) {
   const totalPages = Math.max(1, Math.ceil(total / pageSize))
   const start = total === 0 ? 0 : (page - 1) * pageSize + 1
   const end = Math.min(page * pageSize, total)
@@ -18,7 +19,7 @@ export default function Pagination({ page, pageSize, total, onPageChange }: Pagi
       <p className="text-sm text-sap-text-muted">
         Showing <span className="font-medium text-sap-text">{start}</span>-
         <span className="font-medium text-sap-text">{end}</span> of{' '}
-        <span className="font-medium text-sap-text">{total}</span> tenants
+        <span className="font-medium text-sap-text">{total}</span> {itemLabel}
       </p>
       <div className="flex items-center gap-2">
         <Button

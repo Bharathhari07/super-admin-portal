@@ -49,7 +49,7 @@ export default function TenantManagementPage() {
 
   function handleSearchChange(value: string) {
     setSearch(value)
-    setPage(1) // reset to first page whenever the search term changes
+    setPage(1)
   }
 
   function handleStatusChange(nextStatus: TenantStatus | 'All') {
@@ -111,7 +111,7 @@ export default function TenantManagementPage() {
           togglingTenantId={togglingTenantId}
         />
 
-        <Pagination page={page} pageSize={PAGE_SIZE} total={data?.total ?? 0} onPageChange={setPage} />
+        <Pagination page={page} pageSize={PAGE_SIZE} total={data?.total ?? 0} onPageChange={setPage} itemLabel="tenants" />
       </div>
 
       <CreateTenantModal open={createOpen} onClose={() => setCreateOpen(false)} onCreated={() => setCreateOpen(false)} />

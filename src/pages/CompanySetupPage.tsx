@@ -74,7 +74,7 @@ export default function CompanySetupPage() {
           togglingCompanyId={togglingCompanyId}
         />
 
-        <Pagination page={page} pageSize={PAGE_SIZE} total={data?.total ?? 0} onPageChange={setPage} />
+        <Pagination page={page} pageSize={PAGE_SIZE} total={data?.total ?? 0} onPageChange={setPage} itemLabel="companies" />
       </div>
 
       <CompanyModal
