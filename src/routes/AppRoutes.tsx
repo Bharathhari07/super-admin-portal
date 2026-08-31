@@ -3,6 +3,7 @@ import SuperAdminLayout from '../layouts/SuperAdminLayout'
 import DashboardPage from '../pages/DashboardPage'
 import TenantManagementPage from '../pages/TenantManagementPage'
 import CompanySetupPage from '../pages/CompanySetupPage'
+import BusinessUnitsPage from '../pages/BusinessUnitsPage'
 
 export default function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="tenants" element={<TenantManagementPage />} />
         <Route path="organizations/companies" element={<CompanySetupPage />} />
+        <Route path="organizations/business-units" element={<BusinessUnitsPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>
