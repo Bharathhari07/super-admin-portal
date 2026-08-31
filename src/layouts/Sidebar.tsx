@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom'
-import { LayoutDashboard, Building2, ShieldCheck, X } from 'lucide-react'
+import { LayoutDashboard, Building2, Building, ShieldCheck, X } from 'lucide-react'
 
 const navItems = [
   { to: '/dashboard', label: 'Global Dashboard', icon: LayoutDashboard },
   { to: '/tenants', label: 'Tenant Management', icon: Building2 },
+  { to: '/organizations/companies', label: 'Company Setup', icon: Building },
 ]
 
 interface SidebarProps {
