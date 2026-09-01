@@ -1,0 +1,16 @@
+import type { Department } from '../types/department'
+
+export const dummyDepartments: Department[] = [
+  { id: 'd1', name: 'Frontend Engineering', code: 'DEP001', businessUnitId: 'bu1', businessUnitName: 'Acme Engineering', head: 'Karthik Rao', parentDepartment: null, description: 'Web and mobile client development', status: 'Active', createdAt: '2026-07-10' },
+  { id: 'd2', name: 'Cloud Operations', code: 'DEP002', businessUnitId: 'bu2', businessUnitName: 'TechNova Cloud Services', head: 'Rohan Gupta', parentDepartment: null, description: 'Infrastructure uptime and monitoring', status: 'Active', createdAt: '2026-06-22' },
+  { id: 'd3', name: 'Diagnostics Lab', code: 'DEP003', businessUnitId: 'bu3', businessUnitName: 'Fusion Diagnostics', head: 'Meera Iyer', parentDepartment: null, description: 'Clinical testing and lab operations', status: 'Inactive', createdAt: '2026-05-28' },
+  { id: 'd4', name: 'Product Design', code: 'DEP004', businessUnitId: 'bu4', businessUnitName: 'Bright Product Division', head: 'Vikram Singh', parentDepartment: null, description: 'UX and industrial design', status: 'Active', createdAt: '2026-07-28' },
+  { id: 'd5', name: 'Network Infrastructure', code: 'DEP005', businessUnitId: 'bu5', businessUnitName: 'Nimbus Infrastructure', head: 'Divya Menon', parentDepartment: null, description: 'Data center and networking', status: 'Active', createdAt: '2026-07-20' },
+  { id: 'd6', name: 'Merchandising Planning', code: 'DEP006', businessUnitId: 'bu6', businessUnitName: 'Vertex Merchandising', head: 'David Lee', parentDepartment: null, description: 'Inventory and category planning', status: 'Inactive', createdAt: '2026-07-04' },
+  { id: 'd7', name: 'R&D', code: 'DEP007', businessUnitId: 'bu7', businessUnitName: 'Quantum Research', head: 'Ananya Sharma', parentDepartment: null, description: 'Research and experimental prototyping', status: 'Active', createdAt: '2026-06-24' },
+  { id: 'd8', name: 'Investment Advisory', code: 'DEP008', businessUnitId: 'bu8', businessUnitName: 'Orbit Wealth Management', head: 'Arjun Reddy', parentDepartment: null, description: 'Client portfolio advisory', status: 'Active', createdAt: '2026-06-08' },
+  { id: 'd9', name: 'Freight Scheduling', code: 'DEP009', businessUnitId: 'bu9', businessUnitName: 'Skyline Freight Operations', head: 'Priya Nair', parentDepartment: null, description: 'Route planning and dispatch', status: 'Inactive', createdAt: '2026-06-02' },
+  { id: 'd10', name: 'Content Production', code: 'DEP010', businessUnitId: 'bu10', businessUnitName: 'Pinnacle Broadcasting', head: 'Rahul Mehta', parentDepartment: null, description: 'Video and audio production', status: 'Active', createdAt: '2026-05-09' },
+  { id: 'd11', name: 'Data Engineering', code: 'DEP011', businessUnitId: 'bu11', businessUnitName: 'Cedar Data Science', head: 'Sarah Khan', parentDepartment: null, description: 'Data pipelines and warehousing', status: 'Inactive', createdAt: '2026-04-27' },
+  { id: 'd12', name: 'Quality Assurance', code: 'DEP012', businessUnitId: 'bu12', businessUnitName: 'Alpha Manufacturing Division', head: 'Neha Kapoor', parentDepartment: null, description: 'Production quality and compliance', status: 'Inactive', createdAt: '2026-08-14' },
+]
