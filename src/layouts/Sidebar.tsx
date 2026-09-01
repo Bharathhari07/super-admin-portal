@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard,
   Building2,
+  Users,
   LayoutGrid,
   Building,
   Boxes,
@@ -19,6 +20,7 @@ import {
 const topLevelItems = [
   { to: '/dashboard', label: 'Global Dashboard', icon: LayoutDashboard },
   { to: '/tenants', label: 'Tenant Management', icon: Building2 },
+  { to: '/users', label: 'User Management', icon: Users },
 ]
 
 const orgSubItems = [
@@ -41,8 +43,6 @@ export default function Sidebar({ onNavigate, onClose }: SidebarProps) {
   const isInsideOrg = location.pathname.startsWith('/organizations')
   const [orgExpanded, setOrgExpanded] = useState(isInsideOrg)
 
-  // Sync the group's open/closed state with navigation: expands the
-  // moment you land inside it, collapses the moment you leave it
   useEffect(() => {
     setOrgExpanded(isInsideOrg)
   }, [isInsideOrg])
@@ -74,7 +74,6 @@ export default function Sidebar({ onNavigate, onClose }: SidebarProps) {
           </NavLink>
         ))}
 
-        {/* Organization Management - collapsible parent */}
         <button
           onClick={() => setOrgExpanded((prev) => !prev)}
           className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
