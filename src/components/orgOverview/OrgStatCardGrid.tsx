@@ -1,4 +1,4 @@
-import { Building, Boxes, Network, MapPin, Wallet, Globe, CheckCircle2 } from 'lucide-react'
+import { Building, Boxes, Network, MapPin, Wallet, CheckCircle2 } from 'lucide-react'
 import Spinner from '../common/Spinner'
 import { useOrgOverview } from '../../hooks/queries/useOrgOverview'
 
