@@ -3,6 +3,7 @@ import { dummyCompanies } from '../data/dummyCompanies'
 import { dummyBusinessUnits } from '../data/dummyBusinessUnits'
 import { dummyDepartments } from '../data/dummyDepartments'
 import { dummyBranches } from '../data/dummyBranches'
+import { dummyLocations } from '../data/dummyLocations'
 import { simulateDelay, simulateMutationDelay } from './mockClient'
 import type {
   PlatformUser,
@@ -45,16 +46,18 @@ function applyFilters(users: PlatformUser[], params: UserQueryParams): PlatformU
   return result
 }
 
-function resolveOrgNames(companyId: string, businessUnitId: string, departmentId: string, branchId: string) {
+function resolveOrgNames(companyId: string, businessUnitId: string, departmentId: string, branchId: string, locationId: string) {
   const company = dummyCompanies.find((c) => c.id === companyId)
   const bu = dummyBusinessUnits.find((u) => u.id === businessUnitId)
   const dept = dummyDepartments.find((d) => d.id === departmentId)
   const branch = dummyBranches.find((b) => b.id === branchId)
+  const location = dummyLocations.find((l) => l.id === locationId)
   return {
     companyName: company ? company.companyName : 'Unknown',
     businessUnitName: bu ? bu.name : 'Unknown',
     departmentName: dept ? dept.name : 'Unknown',
     branchName: branch ? branch.name : 'Unknown',
+    locationName: location ? location.name : 'Unknown',
   }
 }
 
@@ -74,7 +77,7 @@ export async function createUser(input: CreateUserInput): Promise<PlatformUser> 
   const emailTaken = userStore.some((u) => u.email.toLowerCase() === input.email.toLowerCase())
   if (emailTaken) throw new Error('Email address already exists.')
 
-  const names = resolveOrgNames(input.companyId, input.businessUnitId, input.departmentId, input.branchId)
+  const names = resolveOrgNames(input.companyId, input.businessUnitId, input.departmentId, input.branchId, input.locationId)
   const newUser: PlatformUser = {
     id: `u${Date.now()}`,
     ...input,
@@ -88,17 +91,14 @@ export async function createUser(input: CreateUserInput): Promise<PlatformUser> 
 export async function updateUser(id: string, input: UpdateUserInput): Promise<PlatformUser> {
   const index = userStore.findIndex((u) => u.id === id)
   if (index === -1) throw new Error('User not found')
-
   const usernameTaken = userStore.some((u) => u.id !== id && u.username.toLowerCase() === input.username.toLowerCase())
   if (usernameTaken) throw new Error('Username already exists. Please choose a unique username.')
-
   const employeeIdTaken = userStore.some((u) => u.id !== id && u.employeeId.toLowerCase() === input.employeeId.toLowerCase())
   if (employeeIdTaken) throw new Error('Employee ID already exists. Please use a unique employee ID.')
-
   const emailTaken = userStore.some((u) => u.id !== id && u.email.toLowerCase() === input.email.toLowerCase())
   if (emailTaken) throw new Error('Email address already exists.')
 
-  const names = resolveOrgNames(input.companyId, input.businessUnitId, input.departmentId, input.branchId)
+  const names = resolveOrgNames(input.companyId, input.businessUnitId, input.departmentId, input.branchId, input.locationId)
   const updated: PlatformUser = { ...userStore[index], ...input, ...names }
   userStore = userStore.map((u) => (u.id === id ? updated : u))
   return simulateMutationDelay(updated)

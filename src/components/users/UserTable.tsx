@@ -19,9 +19,10 @@ interface UserTableProps {
 
 const columns = ['Name', 'Employee ID', 'Email', 'Company', 'Role', 'Status', 'Actions']
 
-function statusTone(status: PlatformUser['status']): 'success' | 'danger' | 'warning' {
+function statusTone(status: PlatformUser['status']): 'success' | 'danger' | 'warning' | 'neutral' {
   if (status === 'Active') return 'success'
   if (status === 'Locked') return 'warning'
+  if (status === 'Pending Activation') return 'neutral'
   return 'danger'
 }
 

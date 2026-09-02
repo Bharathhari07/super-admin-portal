@@ -1,4 +1,6 @@
-export type UserAccountStatus = 'Active' | 'Inactive' | 'Locked'
+export type UserAccountStatus = 'Pending Activation' | 'Active' | 'Inactive' | 'Locked'
+export type Gender = 'Male' | 'Female' | 'Other' | 'Prefer not to say'
+export type AuthenticationMethod = 'Password' | 'SSO' | 'MFA'
 export type EmploymentType = 'Full-Time' | 'Part-Time' | 'Contract' | 'Intern'
 
 // Placeholder role list until the Role Management module exists.
@@ -9,11 +11,19 @@ export type UserRole = (typeof ROLE_OPTIONS)[number]
 
 export interface PlatformUser {
   id: string
-  firstName: string
-  lastName: string
   employeeId: string
+  firstName: string
+  middleName: string
+  lastName: string
+  gender: Gender
+  dateOfBirth: string
   email: string
   mobile: string
+  alternateMobile: string
+  alternateEmail: string
+  username: string
+  temporaryPassword: string
+  authenticationMethod: AuthenticationMethod
   companyId: string
   companyName: string
   businessUnitId: string
@@ -22,11 +32,12 @@ export interface PlatformUser {
   departmentName: string
   branchId: string
   branchName: string
-  designation: string
+  locationId: string
+  locationName: string
   reportingManager: string
+  designation: string
   employmentType: EmploymentType
   joiningDate: string
-  username: string
   role: UserRole
   status: UserAccountStatus
   createdAt: string
@@ -51,38 +62,57 @@ export interface UserQueryParams {
 }
 
 export interface CreateUserInput {
-  firstName: string
-  lastName: string
   employeeId: string
+  firstName: string
+  middleName: string
+  lastName: string
+  gender: Gender
+  dateOfBirth: string
   email: string
   mobile: string
+  alternateMobile: string
+  alternateEmail: string
+  username: string
+  temporaryPassword: string
+  authenticationMethod: AuthenticationMethod
   companyId: string
   businessUnitId: string
   departmentId: string
   branchId: string
-  designation: string
+  locationId: string
   reportingManager: string
+  designation: string
   employmentType: EmploymentType
   joiningDate: string
-  username: string
   role: UserRole
   status: UserAccountStatus
 }
 
 export interface UpdateUserInput {
-  firstName: string
-  lastName: string
   employeeId: string
+  firstName: string
+  middleName: string
+  lastName: string
+  gender: Gender
+  dateOfBirth: string
   email: string
   mobile: string
+  alternateMobile: string
+  alternateEmail: string
+  username: string
+  authenticationMethod: AuthenticationMethod
   companyId: string
   businessUnitId: string
   departmentId: string
   branchId: string
-  designation: string
+  locationId: string
   reportingManager: string
+  designation: string
   employmentType: EmploymentType
   joiningDate: string
-  username: string
   role: UserRole
 }
+
+export const GENDER_OPTIONS: Gender[] = ['Male', 'Female', 'Other', 'Prefer not to say']
+export const AUTHENTICATION_METHOD_OPTIONS: AuthenticationMethod[] = ['Password', 'SSO', 'MFA']
+export const EMPLOYMENT_TYPE_OPTIONS: EmploymentType[] = ['Full-Time', 'Part-Time', 'Contract', 'Intern']

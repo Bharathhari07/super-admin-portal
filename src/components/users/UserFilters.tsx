@@ -34,6 +34,7 @@ export default function UserFilters({
         onChange={(e) => onStatusChange(e.target.value as UserAccountStatus | 'All')}
         options={[
           { label: 'All Statuses', value: 'All' },
+          { label: 'Pending Activation', value: 'Pending Activation' },
           { label: 'Active', value: 'Active' },
           { label: 'Inactive', value: 'Inactive' },
           { label: 'Locked', value: 'Locked' },
