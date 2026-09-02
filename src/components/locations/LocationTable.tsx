@@ -14,7 +14,7 @@ interface LocationTableProps {
   togglingLocationId: string | null
 }
 
-const columns = ['Location', 'Code', 'Type', 'Branch', 'City', 'Status', 'Actions']
+const columns = ['Location', 'Code', 'Type', 'Manager', 'City', 'Status', 'Actions']
 
 export default function LocationTable({
   locations,
@@ -67,7 +67,7 @@ export default function LocationTable({
                 <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-sap-text">{location.name}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{location.code}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{location.locationType}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{location.branchName}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{location.locationManager}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{location.city}, {location.country}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm">
                   <Badge tone={location.status === 'Active' ? 'success' : 'danger'} dot>
