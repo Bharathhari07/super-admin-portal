@@ -14,7 +14,7 @@ interface CostCenterTableProps {
   togglingCenterId: string | null
 }
 
-const columns = ['Cost Center', 'Code', 'Business Unit', 'Department', 'Manager', 'Budget', 'Status', 'Actions']
+const columns = ['Cost Center', 'Code', 'Type', 'Budget Owner', 'Budget', 'Status', 'Actions']
 
 function formatBudget(amount: number, currency: string): string {
   return `${currency} ${amount.toLocaleString()}`
@@ -30,7 +30,7 @@ export default function CostCenterTable({
 }: CostCenterTableProps) {
   return (
     <div className="overflow-x-auto sap-scroll">
-      <table className="w-full min-w-[840px] border-collapse">
+      <table className="w-full min-w-[780px] border-collapse">
         <thead>
           <tr className="border-b border-sap-border bg-sap-bg/60 text-left">
             {columns.map((col) => (
@@ -70,9 +70,8 @@ export default function CostCenterTable({
               <tr key={center.id} className="border-b border-sap-border last:border-0 hover:bg-sap-bg/60">
                 <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-sap-text">{center.name}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{center.code}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{center.businessUnitName}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{center.departmentName}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{center.manager}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{center.costCenterType}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{center.budgetOwner}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{formatBudget(center.budgetAllocation, center.currency)}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm">
                   <Badge tone={center.status === 'Active' ? 'success' : 'danger'} dot>

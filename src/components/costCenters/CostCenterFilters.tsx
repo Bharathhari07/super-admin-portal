@@ -1,24 +1,29 @@
 import Select from '../common/Select'
 import { dummyBusinessUnits } from '../../data/dummyBusinessUnits'
-import type { CostCenterStatus } from '../../types/costCenter'
+import { COST_CENTER_TYPE_OPTIONS } from '../../types/costCenter'
+import type { CostCenterStatus, CostCenterType } from '../../types/costCenter'
 
 interface CostCenterFiltersProps {
   status: CostCenterStatus | 'All'
   businessUnitId: string | 'All'
+  costCenterType: CostCenterType | 'All'
   sortBy: 'name' | 'createdAt' | 'budgetAllocation'
   sortDir: 'asc' | 'desc'
   onStatusChange: (status: CostCenterStatus | 'All') => void
   onBusinessUnitChange: (businessUnitId: string | 'All') => void
+  onCostCenterTypeChange: (costCenterType: CostCenterType | 'All') => void
   onSortChange: (sortBy: 'name' | 'createdAt' | 'budgetAllocation', sortDir: 'asc' | 'desc') => void
 }
 
 export default function CostCenterFilters({
   status,
   businessUnitId,
+  costCenterType,
   sortBy,
   sortDir,
   onStatusChange,
   onBusinessUnitChange,
+  onCostCenterTypeChange,
   onSortChange,
 }: CostCenterFiltersProps) {
   return (
@@ -41,6 +46,12 @@ export default function CostCenterFilters({
           { label: 'All Business Units', value: 'All' },
           ...dummyBusinessUnits.map((u) => ({ label: u.name, value: u.id })),
         ]}
+      />
+      <Select
+        aria-label="Filter by type"
+        value={costCenterType}
+        onChange={(e) => onCostCenterTypeChange(e.target.value as CostCenterType | 'All')}
+        options={[{ label: 'All Types', value: 'All' }, ...COST_CENTER_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))]}
       />
       <Select
         aria-label="Sort cost centers"

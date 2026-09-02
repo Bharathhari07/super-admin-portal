@@ -9,7 +9,7 @@ import CostCenterModal from '../components/costCenters/CostCenterModal'
 import { useCostCenters } from '../hooks/queries/useCostCenters'
 import { useActivateCostCenter } from '../hooks/mutations/useActivateCostCenter'
 import { useDeactivateCostCenter } from '../hooks/mutations/useDeactivateCostCenter'
-import type { CostCenter, CostCenterStatus, CostCenterQueryParams } from '../types/costCenter'
+import type { CostCenter, CostCenterStatus, CostCenterType, CostCenterQueryParams } from '../types/costCenter'
 
 const PAGE_SIZE = 5
 
@@ -17,13 +17,14 @@ export default function CostCentersPage() {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState<CostCenterStatus | 'All'>('All')
   const [businessUnitId, setBusinessUnitId] = useState<string | 'All'>('All')
+  const [costCenterType, setCostCenterType] = useState<CostCenterType | 'All'>('All')
   const [sortBy, setSortBy] = useState<CostCenterQueryParams['sortBy']>('createdAt')
   const [sortDir, setSortDir] = useState<CostCenterQueryParams['sortDir']>('desc')
   const [page, setPage] = useState(1)
   const [modalOpen, setModalOpen] = useState(false)
   const [editingCenter, setEditingCenter] = useState<CostCenter | null>(null)
 
-  const queryParams: CostCenterQueryParams = { search, status, businessUnitId, sortBy, sortDir, page, pageSize: PAGE_SIZE }
+  const queryParams: CostCenterQueryParams = { search, status, businessUnitId, costCenterType, sortBy, sortDir, page, pageSize: PAGE_SIZE }
   const { data, isLoading, isError } = useCostCenters(queryParams)
   const activateCC = useActivateCostCenter()
   const deactivateCC = useDeactivateCostCenter()
@@ -57,10 +58,12 @@ export default function CostCentersPage() {
           <CostCenterFilters
             status={status}
             businessUnitId={businessUnitId}
+            costCenterType={costCenterType}
             sortBy={sortBy ?? 'createdAt'}
             sortDir={sortDir ?? 'desc'}
             onStatusChange={(v) => { setStatus(v); setPage(1) }}
             onBusinessUnitChange={(v) => { setBusinessUnitId(v); setPage(1) }}
+            onCostCenterTypeChange={(v) => { setCostCenterType(v); setPage(1) }}
             onSortChange={(by, dir) => { setSortBy(by); setSortDir(dir) }}
           />
         </div>
