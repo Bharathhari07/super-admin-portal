@@ -1,24 +1,29 @@
 import Select from '../common/Select'
 import { dummyCompanies } from '../../data/dummyCompanies'
-import type { BusinessUnitStatus } from '../../types/businessUnit'
+import { BUSINESS_UNIT_TYPE_OPTIONS } from '../../types/businessUnit'
+import type { BusinessUnitStatus, BusinessUnitType } from '../../types/businessUnit'
 
 interface BusinessUnitFiltersProps {
   status: BusinessUnitStatus | 'All'
   companyId: string | 'All'
+  businessUnitType: BusinessUnitType | 'All'
   sortBy: 'name' | 'createdAt'
   sortDir: 'asc' | 'desc'
   onStatusChange: (status: BusinessUnitStatus | 'All') => void
   onCompanyChange: (companyId: string | 'All') => void
+  onBusinessUnitTypeChange: (businessUnitType: BusinessUnitType | 'All') => void
   onSortChange: (sortBy: 'name' | 'createdAt', sortDir: 'asc' | 'desc') => void
 }
 
 export default function BusinessUnitFilters({
   status,
   companyId,
+  businessUnitType,
   sortBy,
   sortDir,
   onStatusChange,
   onCompanyChange,
+  onBusinessUnitTypeChange,
   onSortChange,
 }: BusinessUnitFiltersProps) {
   return (
@@ -41,6 +46,12 @@ export default function BusinessUnitFilters({
           { label: 'All Companies', value: 'All' },
           ...dummyCompanies.map((c) => ({ label: c.companyName, value: c.id })),
         ]}
+      />
+      <Select
+        aria-label="Filter by type"
+        value={businessUnitType}
+        onChange={(e) => onBusinessUnitTypeChange(e.target.value as BusinessUnitType | 'All')}
+        options={[{ label: 'All Types', value: 'All' }, ...BUSINESS_UNIT_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))]}
       />
       <Select
         aria-label="Sort business units"

@@ -14,7 +14,7 @@ interface BusinessUnitTableProps {
   togglingUnitId: string | null
 }
 
-const columns = ['Business Unit', 'Code', 'Company', 'Head', 'Status', 'Created', 'Actions']
+const columns = ['Business Unit', 'Code', 'Company', 'Type', 'Head', 'Status', 'Created', 'Actions']
 
 export default function BusinessUnitTable({
   units,
@@ -26,7 +26,7 @@ export default function BusinessUnitTable({
 }: BusinessUnitTableProps) {
   return (
     <div className="overflow-x-auto sap-scroll">
-      <table className="w-full min-w-[720px] border-collapse">
+      <table className="w-full min-w-[780px] border-collapse">
         <thead>
           <tr className="border-b border-sap-border bg-sap-bg/60 text-left">
             {columns.map((col) => (
@@ -67,6 +67,7 @@ export default function BusinessUnitTable({
                 <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-sap-text">{unit.name}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{unit.code}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{unit.companyName}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{unit.businessUnitType}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{unit.head}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm">
                   <Badge tone={unit.status === 'Active' ? 'success' : 'danger'} dot>

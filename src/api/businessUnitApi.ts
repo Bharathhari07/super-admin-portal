@@ -23,6 +23,9 @@ function applyFilters(units: BusinessUnit[], params: BusinessUnitQueryParams): B
   if (params.companyId && params.companyId !== 'All') {
     result = result.filter((u) => u.companyId === params.companyId)
   }
+  if (params.businessUnitType && params.businessUnitType !== 'All') {
+    result = result.filter((u) => u.businessUnitType === params.businessUnitType)
+  }
   const sortBy = params.sortBy ?? 'createdAt'
   const sortDir = params.sortDir ?? 'desc'
   result.sort((a, b) => {

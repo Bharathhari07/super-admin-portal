@@ -9,7 +9,7 @@ import BusinessUnitModal from '../components/businessUnits/BusinessUnitModal'
 import { useBusinessUnits } from '../hooks/queries/useBusinessUnits'
 import { useActivateBusinessUnit } from '../hooks/mutations/useActivateBusinessUnit'
 import { useDeactivateBusinessUnit } from '../hooks/mutations/useDeactivateBusinessUnit'
-import type { BusinessUnit, BusinessUnitStatus, BusinessUnitQueryParams } from '../types/businessUnit'
+import type { BusinessUnit, BusinessUnitStatus, BusinessUnitType, BusinessUnitQueryParams } from '../types/businessUnit'
 
 const PAGE_SIZE = 5
 
@@ -17,13 +17,14 @@ export default function BusinessUnitsPage() {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState<BusinessUnitStatus | 'All'>('All')
   const [companyId, setCompanyId] = useState<string | 'All'>('All')
+  const [businessUnitType, setBusinessUnitType] = useState<BusinessUnitType | 'All'>('All')
   const [sortBy, setSortBy] = useState<BusinessUnitQueryParams['sortBy']>('createdAt')
   const [sortDir, setSortDir] = useState<BusinessUnitQueryParams['sortDir']>('desc')
   const [page, setPage] = useState(1)
   const [modalOpen, setModalOpen] = useState(false)
   const [editingUnit, setEditingUnit] = useState<BusinessUnit | null>(null)
 
-  const queryParams: BusinessUnitQueryParams = { search, status, companyId, sortBy, sortDir, page, pageSize: PAGE_SIZE }
+  const queryParams: BusinessUnitQueryParams = { search, status, companyId, businessUnitType, sortBy, sortDir, page, pageSize: PAGE_SIZE }
   const { data, isLoading, isError } = useBusinessUnits(queryParams)
   const activateBU = useActivateBusinessUnit()
   const deactivateBU = useDeactivateBusinessUnit()
@@ -57,10 +58,12 @@ export default function BusinessUnitsPage() {
           <BusinessUnitFilters
             status={status}
             companyId={companyId}
+            businessUnitType={businessUnitType}
             sortBy={sortBy ?? 'createdAt'}
             sortDir={sortDir ?? 'desc'}
             onStatusChange={(v) => { setStatus(v); setPage(1) }}
             onCompanyChange={(v) => { setCompanyId(v); setPage(1) }}
+            onBusinessUnitTypeChange={(v) => { setBusinessUnitType(v); setPage(1) }}
             onSortChange={(by, dir) => { setSortBy(by); setSortDir(dir) }}
           />
         </div>
