@@ -14,7 +14,13 @@ interface CompanyTableProps {
   togglingCompanyId: string | null
 }
 
-const columns = ['Company', 'Code', 'Type', 'Industry', 'Location', 'Status', 'Created', 'Actions']
+const columns = ['Company', 'Code', 'Legal Entity Type', 'Industry', 'Location', 'Status', 'Created', 'Actions']
+
+function statusTone(status: Company['status']): 'success' | 'danger' | 'neutral' {
+  if (status === 'Active') return 'success'
+  if (status === 'Inactive') return 'danger'
+  return 'neutral'
+}
 
 export default function CompanyTable({
   companies,
@@ -26,7 +32,7 @@ export default function CompanyTable({
 }: CompanyTableProps) {
   return (
     <div className="overflow-x-auto sap-scroll">
-      <table className="w-full min-w-[760px] border-collapse">
+      <table className="w-full min-w-[780px] border-collapse">
         <thead>
           <tr className="border-b border-sap-border bg-sap-bg/60 text-left">
             {columns.map((col) => (
@@ -66,11 +72,11 @@ export default function CompanyTable({
               <tr key={company.id} className="border-b border-sap-border last:border-0 hover:bg-sap-bg/60">
                 <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-sap-text">{company.companyName}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{company.companyCode}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{company.businessType}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{company.legalEntityType}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{company.industry}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{company.city}, {company.country}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm">
-                  <Badge tone={company.status === 'Active' ? 'success' : 'danger'} dot>
+                  <Badge tone={statusTone(company.status)} dot>
                     {company.status}
                   </Badge>
                 </td>

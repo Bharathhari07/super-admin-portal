@@ -14,7 +14,7 @@ export interface CompanySummary {
   businessUnitCount: number
   departmentCount: number
   branchCount: number
-  status: 'Active' | 'Inactive'
+  status: 'Draft' | 'Active' | 'Inactive'
 }
 
 export interface OrgOverviewResponse {

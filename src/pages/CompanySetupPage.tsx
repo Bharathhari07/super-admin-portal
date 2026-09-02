@@ -9,21 +9,21 @@ import CompanyModal from '../components/companies/CompanyModal'
 import { useCompanies } from '../hooks/queries/useCompanies'
 import { useActivateCompany } from '../hooks/mutations/useActivateCompany'
 import { useDeactivateCompany } from '../hooks/mutations/useDeactivateCompany'
-import type { Company, CompanyStatus, BusinessType, CompanyQueryParams } from '../types/company'
+import type { Company, CompanyStatus, LegalEntityType, CompanyQueryParams } from '../types/company'
 
 const PAGE_SIZE = 5
 
 export default function CompanySetupPage() {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState<CompanyStatus | 'All'>('All')
-  const [businessType, setBusinessType] = useState<BusinessType | 'All'>('All')
+  const [legalEntityType, setLegalEntityType] = useState<LegalEntityType | 'All'>('All')
   const [sortBy, setSortBy] = useState<CompanyQueryParams['sortBy']>('createdAt')
   const [sortDir, setSortDir] = useState<CompanyQueryParams['sortDir']>('desc')
   const [page, setPage] = useState(1)
   const [modalOpen, setModalOpen] = useState(false)
   const [editingCompany, setEditingCompany] = useState<Company | null>(null)
 
-  const queryParams: CompanyQueryParams = { search, status, businessType, sortBy, sortDir, page, pageSize: PAGE_SIZE }
+  const queryParams: CompanyQueryParams = { search, status, legalEntityType, sortBy, sortDir, page, pageSize: PAGE_SIZE }
   const { data, isLoading, isError } = useCompanies(queryParams)
   const activateCompany = useActivateCompany()
   const deactivateCompany = useDeactivateCompany()
@@ -56,11 +56,11 @@ export default function CompanySetupPage() {
           <CompanySearchBar value={search} onChange={(v) => { setSearch(v); setPage(1) }} />
           <CompanyFilters
             status={status}
-            businessType={businessType}
+            legalEntityType={legalEntityType}
             sortBy={sortBy ?? 'createdAt'}
             sortDir={sortDir ?? 'desc'}
             onStatusChange={(v) => { setStatus(v); setPage(1) }}
-            onBusinessTypeChange={(v) => { setBusinessType(v); setPage(1) }}
+            onLegalEntityTypeChange={(v) => { setLegalEntityType(v); setPage(1) }}
             onSortChange={(by, dir) => { setSortBy(by); setSortDir(dir) }}
           />
         </div>

@@ -21,8 +21,8 @@ function applyFilters(companies: Company[], params: CompanyQueryParams): Company
   if (params.status && params.status !== 'All') {
     result = result.filter((c) => c.status === params.status)
   }
-  if (params.businessType && params.businessType !== 'All') {
-    result = result.filter((c) => c.businessType === params.businessType)
+  if (params.legalEntityType && params.legalEntityType !== 'All') {
+    result = result.filter((c) => c.legalEntityType === params.legalEntityType)
   }
   const sortBy = params.sortBy ?? 'createdAt'
   const sortDir = params.sortDir ?? 'desc'
@@ -54,9 +54,16 @@ export async function fetchCompanyById(id: string): Promise<Company> {
   return simulateDelay(company)
 }
 
+// BR-0121/0122/0124: Company Code and Business Registration Number
+// must each be unique within the tenant.
 export async function createCompany(input: CreateCompanyInput): Promise<Company> {
   const codeExists = companyStore.some((c) => c.companyCode.toLowerCase() === input.companyCode.toLowerCase())
   if (codeExists) throw new Error('Company code already exists. Please choose a unique code.')
+  const regExists = companyStore.some(
+    (c) => c.registrationNumber.toLowerCase() === input.registrationNumber.toLowerCase(),
+  )
+  if (regExists) throw new Error('Business registration number already exists.')
+
   const newCompany: Company = { id: `c${Date.now()}`, ...input, createdAt: new Date().toISOString().slice(0, 10) }
   companyStore = [newCompany, ...companyStore]
   return simulateMutationDelay(newCompany)
@@ -65,10 +72,17 @@ export async function createCompany(input: CreateCompanyInput): Promise<Company>
 export async function updateCompany(id: string, input: UpdateCompanyInput): Promise<Company> {
   const index = companyStore.findIndex((c) => c.id === id)
   if (index === -1) throw new Error('Company not found')
+
   const codeTaken = companyStore.some(
     (c) => c.id !== id && c.companyCode.toLowerCase() === input.companyCode.toLowerCase(),
   )
   if (codeTaken) throw new Error('Company code already exists. Please choose a unique code.')
+
+  const regTaken = companyStore.some(
+    (c) => c.id !== id && c.registrationNumber.toLowerCase() === input.registrationNumber.toLowerCase(),
+  )
+  if (regTaken) throw new Error('Business registration number already exists.')
+
   const updated: Company = { ...companyStore[index], ...input }
   companyStore = companyStore.map((c) => (c.id === id ? updated : c))
   return simulateMutationDelay(updated)

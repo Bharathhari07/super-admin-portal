@@ -1,24 +1,24 @@
 import Select from '../common/Select'
-import { BUSINESS_TYPE_OPTIONS } from '../../types/company'
-import type { CompanyStatus, BusinessType } from '../../types/company'
+import { LEGAL_ENTITY_TYPE_OPTIONS } from '../../types/company'
+import type { CompanyStatus, LegalEntityType } from '../../types/company'
 
 interface CompanyFiltersProps {
   status: CompanyStatus | 'All'
-  businessType: BusinessType | 'All'
+  legalEntityType: LegalEntityType | 'All'
   sortBy: 'companyName' | 'createdAt'
   sortDir: 'asc' | 'desc'
   onStatusChange: (status: CompanyStatus | 'All') => void
-  onBusinessTypeChange: (businessType: BusinessType | 'All') => void
+  onLegalEntityTypeChange: (legalEntityType: LegalEntityType | 'All') => void
   onSortChange: (sortBy: 'companyName' | 'createdAt', sortDir: 'asc' | 'desc') => void
 }
 
 export default function CompanyFilters({
   status,
-  businessType,
+  legalEntityType,
   sortBy,
   sortDir,
   onStatusChange,
-  onBusinessTypeChange,
+  onLegalEntityTypeChange,
   onSortChange,
 }: CompanyFiltersProps) {
   return (
@@ -29,15 +29,16 @@ export default function CompanyFilters({
         onChange={(e) => onStatusChange(e.target.value as CompanyStatus | 'All')}
         options={[
           { label: 'All Statuses', value: 'All' },
+          { label: 'Draft', value: 'Draft' },
           { label: 'Active', value: 'Active' },
           { label: 'Inactive', value: 'Inactive' },
         ]}
       />
       <Select
-        aria-label="Filter by business type"
-        value={businessType}
-        onChange={(e) => onBusinessTypeChange(e.target.value as BusinessType | 'All')}
-        options={[{ label: 'All Types', value: 'All' }, ...BUSINESS_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))]}
+        aria-label="Filter by legal entity type"
+        value={legalEntityType}
+        onChange={(e) => onLegalEntityTypeChange(e.target.value as LegalEntityType | 'All')}
+        options={[{ label: 'All Entity Types', value: 'All' }, ...LEGAL_ENTITY_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))]}
       />
       <Select
         aria-label="Sort companies"
