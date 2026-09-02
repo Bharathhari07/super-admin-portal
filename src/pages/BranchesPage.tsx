@@ -9,7 +9,7 @@ import BranchModal from '../components/branches/BranchModal'
 import { useBranches } from '../hooks/queries/useBranches'
 import { useActivateBranch } from '../hooks/mutations/useActivateBranch'
 import { useDeactivateBranch } from '../hooks/mutations/useDeactivateBranch'
-import type { Branch, BranchStatus, BranchQueryParams } from '../types/branch'
+import type { Branch, BranchStatus, BranchType, BranchQueryParams } from '../types/branch'
 
 const PAGE_SIZE = 5
 
@@ -17,13 +17,14 @@ export default function BranchesPage() {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState<BranchStatus | 'All'>('All')
   const [businessUnitId, setBusinessUnitId] = useState<string | 'All'>('All')
+  const [branchType, setBranchType] = useState<BranchType | 'All'>('All')
   const [sortBy, setSortBy] = useState<BranchQueryParams['sortBy']>('createdAt')
   const [sortDir, setSortDir] = useState<BranchQueryParams['sortDir']>('desc')
   const [page, setPage] = useState(1)
   const [modalOpen, setModalOpen] = useState(false)
   const [editingBranch, setEditingBranch] = useState<Branch | null>(null)
 
-  const queryParams: BranchQueryParams = { search, status, businessUnitId, sortBy, sortDir, page, pageSize: PAGE_SIZE }
+  const queryParams: BranchQueryParams = { search, status, businessUnitId, branchType, sortBy, sortDir, page, pageSize: PAGE_SIZE }
   const { data, isLoading, isError } = useBranches(queryParams)
   const activateBranch = useActivateBranch()
   const deactivateBranch = useDeactivateBranch()
@@ -57,10 +58,12 @@ export default function BranchesPage() {
           <BranchFilters
             status={status}
             businessUnitId={businessUnitId}
+            branchType={branchType}
             sortBy={sortBy ?? 'createdAt'}
             sortDir={sortDir ?? 'desc'}
             onStatusChange={(v) => { setStatus(v); setPage(1) }}
             onBusinessUnitChange={(v) => { setBusinessUnitId(v); setPage(1) }}
+            onBranchTypeChange={(v) => { setBranchType(v); setPage(1) }}
             onSortChange={(by, dir) => { setSortBy(by); setSortDir(dir) }}
           />
         </div>

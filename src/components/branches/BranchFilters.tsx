@@ -1,24 +1,29 @@
 import Select from '../common/Select'
 import { dummyBusinessUnits } from '../../data/dummyBusinessUnits'
-import type { BranchStatus } from '../../types/branch'
+import { BRANCH_TYPE_OPTIONS } from '../../types/branch'
+import type { BranchStatus, BranchType } from '../../types/branch'
 
 interface BranchFiltersProps {
   status: BranchStatus | 'All'
   businessUnitId: string | 'All'
+  branchType: BranchType | 'All'
   sortBy: 'name' | 'createdAt'
   sortDir: 'asc' | 'desc'
   onStatusChange: (status: BranchStatus | 'All') => void
   onBusinessUnitChange: (businessUnitId: string | 'All') => void
+  onBranchTypeChange: (branchType: BranchType | 'All') => void
   onSortChange: (sortBy: 'name' | 'createdAt', sortDir: 'asc' | 'desc') => void
 }
 
 export default function BranchFilters({
   status,
   businessUnitId,
+  branchType,
   sortBy,
   sortDir,
   onStatusChange,
   onBusinessUnitChange,
+  onBranchTypeChange,
   onSortChange,
 }: BranchFiltersProps) {
   return (
@@ -41,6 +46,12 @@ export default function BranchFilters({
           { label: 'All Business Units', value: 'All' },
           ...dummyBusinessUnits.map((u) => ({ label: u.name, value: u.id })),
         ]}
+      />
+      <Select
+        aria-label="Filter by type"
+        value={branchType}
+        onChange={(e) => onBranchTypeChange(e.target.value as BranchType | 'All')}
+        options={[{ label: 'All Types', value: 'All' }, ...BRANCH_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))]}
       />
       <Select
         aria-label="Sort branches"

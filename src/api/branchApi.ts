@@ -1,5 +1,6 @@
 import { dummyBranches } from '../data/dummyBranches'
 import { dummyBusinessUnits } from '../data/dummyBusinessUnits'
+import { dummyCompanies } from '../data/dummyCompanies'
 import { simulateDelay, simulateMutationDelay } from './mockClient'
 import type {
   Branch,
@@ -22,6 +23,9 @@ function applyFilters(branches: Branch[], params: BranchQueryParams): Branch[] {
   }
   if (params.businessUnitId && params.businessUnitId !== 'All') {
     result = result.filter((b) => b.businessUnitId === params.businessUnitId)
+  }
+  if (params.branchType && params.branchType !== 'All') {
+    result = result.filter((b) => b.branchType === params.branchType)
   }
   const sortBy = params.sortBy ?? 'createdAt'
   const sortDir = params.sortDir ?? 'desc'
@@ -46,9 +50,11 @@ export async function createBranch(input: CreateBranchInput): Promise<Branch> {
   const codeExists = branchStore.some((b) => b.code.toLowerCase() === input.code.toLowerCase())
   if (codeExists) throw new Error('Branch code already exists. Please choose a unique code.')
   const bu = dummyBusinessUnits.find((u) => u.id === input.businessUnitId)
+  const company = dummyCompanies.find((c) => c.id === input.companyId)
   const newBranch: Branch = {
     id: `br${Date.now()}`,
     ...input,
+    companyName: company ? company.companyName : 'Unknown',
     businessUnitName: bu ? bu.name : 'Unknown',
     createdAt: new Date().toISOString().slice(0, 10),
   }
@@ -62,7 +68,13 @@ export async function updateBranch(id: string, input: UpdateBranchInput): Promis
   const codeTaken = branchStore.some((b) => b.id !== id && b.code.toLowerCase() === input.code.toLowerCase())
   if (codeTaken) throw new Error('Branch code already exists. Please choose a unique code.')
   const bu = dummyBusinessUnits.find((u) => u.id === input.businessUnitId)
-  const updated: Branch = { ...branchStore[index], ...input, businessUnitName: bu ? bu.name : 'Unknown' }
+  const company = dummyCompanies.find((c) => c.id === input.companyId)
+  const updated: Branch = {
+    ...branchStore[index],
+    ...input,
+    companyName: company ? company.companyName : 'Unknown',
+    businessUnitName: bu ? bu.name : 'Unknown',
+  }
   branchStore = branchStore.map((b) => (b.id === id ? updated : b))
   return simulateMutationDelay(updated)
 }

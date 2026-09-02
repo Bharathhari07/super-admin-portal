@@ -14,7 +14,7 @@ interface BranchTableProps {
   togglingBranchId: string | null
 }
 
-const columns = ['Branch', 'Code', 'Business Unit', 'Manager', 'Location', 'Status', 'Actions']
+const columns = ['Branch', 'Code', 'Type', 'Manager', 'Location', 'Status', 'Actions']
 
 export default function BranchTable({
   branches,
@@ -26,7 +26,7 @@ export default function BranchTable({
 }: BranchTableProps) {
   return (
     <div className="overflow-x-auto sap-scroll">
-      <table className="w-full min-w-[760px] border-collapse">
+      <table className="w-full min-w-[780px] border-collapse">
         <thead>
           <tr className="border-b border-sap-border bg-sap-bg/60 text-left">
             {columns.map((col) => (
@@ -66,7 +66,7 @@ export default function BranchTable({
               <tr key={branch.id} className="border-b border-sap-border last:border-0 hover:bg-sap-bg/60">
                 <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-sap-text">{branch.name}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{branch.code}</td>
-                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{branch.businessUnitName}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{branch.branchType}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{branch.manager}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{branch.city}, {branch.country}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm">
