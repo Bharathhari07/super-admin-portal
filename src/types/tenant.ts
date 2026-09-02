@@ -1,19 +1,30 @@
-export type TenantStatus = 'Active' | 'Inactive'
+export type TenantStatus = 'Draft' | 'Active' | 'Suspended' | 'Inactive'
 export type TenantPlan = 'Basic' | 'Pro' | 'Enterprise'
+export type OrganizationType = 'Enterprise' | 'SME' | 'Startup' | 'Government' | 'Non-Profit'
 
 export interface Tenant {
   id: string
   name: string
+  legalBusinessName: string
   code: string
+  businessRegistrationNumber: string
+  organizationType: OrganizationType
   adminName: string
   adminEmail: string
   phone: string
+  telephone: string
+  website: string
+  addressLine1: string
+  addressLine2: string
+  city: string
+  state: string
   country: string
+  postalCode: string
   timeZone: string
   plan: TenantPlan
   users: number
   status: TenantStatus
-  createdAt: string // ISO date string
+  createdAt: string
 }
 
 export interface TenantStats {
@@ -24,7 +35,6 @@ export interface TenantStats {
   storageUsedPercent: number
 }
 
-// Shape returned by GET /api/tenants (paginated list)
 export interface TenantListResponse {
   data: Tenant[]
   total: number
@@ -32,7 +42,6 @@ export interface TenantListResponse {
   pageSize: number
 }
 
-// Query params sent to GET /api/tenants
 export interface TenantQueryParams {
   search?: string
   status?: TenantStatus | 'All'
@@ -43,32 +52,50 @@ export interface TenantQueryParams {
   pageSize?: number
 }
 
-// Body for POST /api/tenants
 export interface CreateTenantInput {
   name: string
+  legalBusinessName: string
   code: string
+  businessRegistrationNumber: string
+  organizationType: OrganizationType
   adminName: string
   adminEmail: string
   phone: string
-  plan: TenantPlan
+  telephone: string
+  website: string
+  addressLine1: string
+  addressLine2: string
+  city: string
+  state: string
   country: string
+  postalCode: string
   timeZone: string
+  plan: TenantPlan
   status: TenantStatus
 }
 
-// Body for PUT /api/tenants/:id
 export interface UpdateTenantInput {
   name: string
+  legalBusinessName: string
   code: string
+  businessRegistrationNumber: string
+  organizationType: OrganizationType
   adminName: string
   adminEmail: string
   phone: string
-  plan: TenantPlan
+  telephone: string
+  website: string
+  addressLine1: string
+  addressLine2: string
+  city: string
+  state: string
   country: string
+  postalCode: string
   timeZone: string
+  plan: TenantPlan
 }
 
-// Common option lists used by Create/Edit tenant forms
+export const ORGANIZATION_TYPE_OPTIONS: OrganizationType[] = ['Enterprise', 'SME', 'Startup', 'Government', 'Non-Profit']
 export const COUNTRY_OPTIONS = ['India', 'United States', 'United Kingdom', 'Australia', 'Singapore'] as const
 export const TIME_ZONE_OPTIONS = [
   'Asia/Kolkata',

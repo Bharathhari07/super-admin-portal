@@ -28,7 +28,9 @@ export default function TenantFilters({
         onChange={(e) => onStatusChange(e.target.value as TenantStatus | 'All')}
         options={[
           { label: 'All Statuses', value: 'All' },
+          { label: 'Draft', value: 'Draft' },
           { label: 'Active', value: 'Active' },
+          { label: 'Suspended', value: 'Suspended' },
           { label: 'Inactive', value: 'Inactive' },
         ]}
       />

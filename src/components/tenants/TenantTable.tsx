@@ -13,7 +13,7 @@ interface TenantTableProps {
   togglingTenantId: string | null
 }
 
-const columns = ['Tenant', 'Code', 'Admin', 'Plan', 'Users', 'Status', 'Created', 'Actions']
+const columns = ['Tenant', 'Code', 'Org Type', 'Admin', 'Plan', 'Users', 'Status', 'Created', 'Actions']
 
 export default function TenantTable({
   tenants,
@@ -26,7 +26,7 @@ export default function TenantTable({
 }: TenantTableProps) {
   return (
     <div className="overflow-x-auto sap-scroll">
-      <table className="w-full min-w-[720px] border-collapse">
+      <table className="w-full min-w-[820px] border-collapse">
         <thead>
           <tr className="border-b border-sap-border bg-sap-bg/60 text-left">
             {columns.map((col) => (
@@ -50,7 +50,7 @@ export default function TenantTable({
           {isError && !isLoading && (
             <tr>
               <td colSpan={columns.length} className="py-10 text-center text-sm text-sap-danger">
-                Couldn&apos;t load tenants. Please try again.
+                Couldn't load tenants. Please try again.
               </td>
             </tr>
           )}

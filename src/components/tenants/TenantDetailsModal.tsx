@@ -33,7 +33,7 @@ export default function TenantDetailsModal({ tenantId, onClose, onEdit }: Tenant
   }
 
   return (
-    <Modal open={tenantId !== null} title="Tenant Details" onClose={onClose}>
+    <Modal open={tenantId !== null} title="Tenant Details" onClose={onClose} widthClass="max-w-2xl">
       {isLoading && (
         <div className="flex justify-center py-10">
           <Spinner />
@@ -44,6 +44,7 @@ export default function TenantDetailsModal({ tenantId, onClose, onEdit }: Tenant
         <div className="space-y-5">
           <div>
             <h3 className="text-lg font-semibold text-sap-text">{tenant.name}</h3>
+            <p className="text-sm text-sap-text-muted">{tenant.legalBusinessName}</p>
             <p className="text-sm text-sap-text-muted">{tenant.code}</p>
             <div className="mt-2">
               <StatusBadge status={tenant.status} />
@@ -57,21 +58,48 @@ export default function TenantDetailsModal({ tenantId, onClose, onEdit }: Tenant
               Tenant Information
             </h4>
             <dl className="grid grid-cols-2 gap-y-2 text-sm">
+              <dt className="text-sap-text-muted">Organization Type</dt>
+              <dd className="text-sap-text">{tenant.organizationType}</dd>
+              <dt className="text-sap-text-muted">Registration Number</dt>
+              <dd className="text-sap-text">{tenant.businessRegistrationNumber}</dd>
+              <dt className="text-sap-text-muted">Plan</dt>
+              <dd className="text-sap-text">{tenant.plan}</dd>
+              <dt className="text-sap-text-muted">Created</dt>
+              <dd className="text-sap-text">{tenant.createdAt}</dd>
+            </dl>
+          </div>
+
+          <hr className="border-sap-border" />
+
+          <div>
+            <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">
+              Admin & Contact
+            </h4>
+            <dl className="grid grid-cols-2 gap-y-2 text-sm">
               <dt className="text-sap-text-muted">Admin</dt>
               <dd className="text-sap-text">{tenant.adminName}</dd>
               <dt className="text-sap-text-muted">Email</dt>
               <dd className="text-sap-text">{tenant.adminEmail}</dd>
               <dt className="text-sap-text-muted">Phone</dt>
               <dd className="text-sap-text">{tenant.phone}</dd>
-              <dt className="text-sap-text-muted">Country</dt>
-              <dd className="text-sap-text">{tenant.country}</dd>
+              <dt className="text-sap-text-muted">Telephone</dt>
+              <dd className="text-sap-text">{tenant.telephone || '-'}</dd>
+              <dt className="text-sap-text-muted">Website</dt>
+              <dd className="text-sap-text">{tenant.website || '-'}</dd>
               <dt className="text-sap-text-muted">Time Zone</dt>
               <dd className="text-sap-text">{tenant.timeZone}</dd>
-              <dt className="text-sap-text-muted">Created</dt>
-              <dd className="text-sap-text">{tenant.createdAt}</dd>
-              <dt className="text-sap-text-muted">Plan</dt>
-              <dd className="text-sap-text">{tenant.plan}</dd>
             </dl>
+          </div>
+
+          <hr className="border-sap-border" />
+
+          <div>
+            <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Address</h4>
+            <p className="text-sm text-sap-text">
+              {tenant.addressLine1}{tenant.addressLine2 ? `, ${tenant.addressLine2}` : ''}
+              <br />
+              {tenant.city}, {tenant.state}, {tenant.country} - {tenant.postalCode}
+            </p>
           </div>
 
           <hr className="border-sap-border" />

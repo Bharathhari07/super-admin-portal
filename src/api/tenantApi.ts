@@ -1,5 +1,5 @@
 import { dummyTenants, dummyTenantStats } from '../data/dummyTenants'
-import { simulateDelay, simulateMutationDelay, maybeFail } from './mockClient'
+import { simulateDelay, simulateMutationDelay } from './mockClient'
 import type {
   Tenant,
   TenantListResponse,
@@ -9,8 +9,6 @@ import type {
   UpdateTenantInput,
 } from '../types/tenant'
 
-// In-memory store that mutations operate on, so created/updated tenants
-// persist for the rest of the session (until the page is refreshed).
 let tenantStore: Tenant[] = [...dummyTenants]
 
 function applyFilters(tenants: Tenant[], params: TenantQueryParams): Tenant[] {
@@ -44,32 +42,25 @@ function applyFilters(tenants: Tenant[], params: TenantQueryParams): Tenant[] {
   return result
 }
 
-// GET /api/tenants
 export async function fetchTenants(params: TenantQueryParams): Promise<TenantListResponse> {
-  maybeFail(0)
   const filtered = applyFilters(tenantStore, params)
   const page = params.page ?? 1
   const pageSize = params.pageSize ?? 5
   const start = (page - 1) * pageSize
-  const pageData = filtered.slice(start, start + pageSize)
-
   return simulateDelay({
-    data: pageData,
+    data: filtered.slice(start, start + pageSize),
     total: filtered.length,
     page,
     pageSize,
   })
 }
 
-// GET /api/tenants/:id
 export async function fetchTenantById(id: string): Promise<Tenant> {
   const tenant = tenantStore.find((t) => t.id === id)
   if (!tenant) throw new Error('Tenant not found')
   return simulateDelay(tenant)
 }
 
-// GET /api/tenants/:id/stats (extends the recommended API structure
-// with a stats sub-resource, used by the Tenant Details view)
 export async function fetchTenantStats(id: string): Promise<TenantStats> {
   const tenant = tenantStore.find((t) => t.id === id)
   if (!tenant) throw new Error('Tenant not found')
@@ -86,24 +77,17 @@ export async function fetchTenantStats(id: string): Promise<TenantStats> {
   return simulateDelay(stats)
 }
 
-// POST /api/tenants
 export async function createTenant(input: CreateTenantInput): Promise<Tenant> {
   const codeExists = tenantStore.some((t) => t.code.toLowerCase() === input.code.toLowerCase())
-  if (codeExists) {
-    throw new Error('Tenant code already exists. Please choose a unique code.')
-  }
+  if (codeExists) throw new Error('Tenant code already exists. Please choose a unique code.')
+  const regExists = tenantStore.some(
+    (t) => t.businessRegistrationNumber.toLowerCase() === input.businessRegistrationNumber.toLowerCase(),
+  )
+  if (regExists) throw new Error('Business registration number already exists.')
 
   const newTenant: Tenant = {
     id: `t${Date.now()}`,
-    name: input.name,
-    code: input.code,
-    adminName: input.adminName,
-    adminEmail: input.adminEmail,
-    phone: input.phone,
-    country: input.country,
-    timeZone: input.timeZone,
-    plan: input.plan,
-    status: input.status,
+    ...input,
     users: 0,
     createdAt: new Date().toISOString().slice(0, 10),
   }
@@ -112,7 +96,6 @@ export async function createTenant(input: CreateTenantInput): Promise<Tenant> {
   return simulateMutationDelay(newTenant)
 }
 
-// PUT /api/tenants/:id
 export async function updateTenant(id: string, input: UpdateTenantInput): Promise<Tenant> {
   const index = tenantStore.findIndex((t) => t.id === id)
   if (index === -1) throw new Error('Tenant not found')
@@ -120,16 +103,18 @@ export async function updateTenant(id: string, input: UpdateTenantInput): Promis
   const codeTakenByAnother = tenantStore.some(
     (t) => t.id !== id && t.code.toLowerCase() === input.code.toLowerCase(),
   )
-  if (codeTakenByAnother) {
-    throw new Error('Tenant code already exists. Please choose a unique code.')
-  }
+  if (codeTakenByAnother) throw new Error('Tenant code already exists. Please choose a unique code.')
+
+  const regTaken = tenantStore.some(
+    (t) => t.id !== id && t.businessRegistrationNumber.toLowerCase() === input.businessRegistrationNumber.toLowerCase(),
+  )
+  if (regTaken) throw new Error('Business registration number already exists.')
 
   const updated: Tenant = { ...tenantStore[index], ...input }
   tenantStore = tenantStore.map((t) => (t.id === id ? updated : t))
   return simulateMutationDelay(updated)
 }
 
-// PATCH /api/tenants/:id/activate
 export async function activateTenant(id: string): Promise<Tenant> {
   const index = tenantStore.findIndex((t) => t.id === id)
   if (index === -1) throw new Error('Tenant not found')
@@ -138,7 +123,6 @@ export async function activateTenant(id: string): Promise<Tenant> {
   return simulateMutationDelay(updated)
 }
 
-// PATCH /api/tenants/:id/deactivate
 export async function deactivateTenant(id: string): Promise<Tenant> {
   const index = tenantStore.findIndex((t) => t.id === id)
   if (index === -1) throw new Error('Tenant not found')

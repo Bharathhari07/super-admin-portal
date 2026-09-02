@@ -23,6 +23,7 @@ export default function TenantTableRow({
     <tr className="border-b border-sap-border last:border-0 hover:bg-sap-bg/60">
       <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-sap-text">{tenant.name}</td>
       <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{tenant.code}</td>
+      <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{tenant.organizationType}</td>
       <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{tenant.adminName}</td>
       <td className="whitespace-nowrap px-4 py-3 text-sm">
         <PlanBadge plan={tenant.plan} />
