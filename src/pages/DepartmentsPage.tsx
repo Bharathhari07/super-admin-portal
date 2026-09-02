@@ -9,7 +9,7 @@ import DepartmentModal from '../components/departments/DepartmentModal'
 import { useDepartments } from '../hooks/queries/useDepartments'
 import { useActivateDepartment } from '../hooks/mutations/useActivateDepartment'
 import { useDeactivateDepartment } from '../hooks/mutations/useDeactivateDepartment'
-import type { Department, DepartmentStatus, DepartmentQueryParams } from '../types/department'
+import type { Department, DepartmentStatus, DepartmentType, DepartmentQueryParams } from '../types/department'
 
 const PAGE_SIZE = 5
 
@@ -17,13 +17,14 @@ export default function DepartmentsPage() {
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState<DepartmentStatus | 'All'>('All')
   const [businessUnitId, setBusinessUnitId] = useState<string | 'All'>('All')
+  const [departmentType, setDepartmentType] = useState<DepartmentType | 'All'>('All')
   const [sortBy, setSortBy] = useState<DepartmentQueryParams['sortBy']>('createdAt')
   const [sortDir, setSortDir] = useState<DepartmentQueryParams['sortDir']>('desc')
   const [page, setPage] = useState(1)
   const [modalOpen, setModalOpen] = useState(false)
   const [editingDept, setEditingDept] = useState<Department | null>(null)
 
-  const queryParams: DepartmentQueryParams = { search, status, businessUnitId, sortBy, sortDir, page, pageSize: PAGE_SIZE }
+  const queryParams: DepartmentQueryParams = { search, status, businessUnitId, departmentType, sortBy, sortDir, page, pageSize: PAGE_SIZE }
   const { data, isLoading, isError } = useDepartments(queryParams)
   const activateDept = useActivateDepartment()
   const deactivateDept = useDeactivateDepartment()
@@ -57,10 +58,12 @@ export default function DepartmentsPage() {
           <DepartmentFilters
             status={status}
             businessUnitId={businessUnitId}
+            departmentType={departmentType}
             sortBy={sortBy ?? 'createdAt'}
             sortDir={sortDir ?? 'desc'}
             onStatusChange={(v) => { setStatus(v); setPage(1) }}
             onBusinessUnitChange={(v) => { setBusinessUnitId(v); setPage(1) }}
+            onDepartmentTypeChange={(v) => { setDepartmentType(v); setPage(1) }}
             onSortChange={(by, dir) => { setSortBy(by); setSortDir(dir) }}
           />
         </div>

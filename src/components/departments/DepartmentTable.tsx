@@ -14,7 +14,7 @@ interface DepartmentTableProps {
   togglingDeptId: string | null
 }
 
-const columns = ['Department', 'Code', 'Business Unit', 'Head', 'Status', 'Created', 'Actions']
+const columns = ['Department', 'Code', 'Business Unit', 'Type', 'Head', 'Status', 'Created', 'Actions']
 
 export default function DepartmentTable({
   departments,
@@ -26,7 +26,7 @@ export default function DepartmentTable({
 }: DepartmentTableProps) {
   return (
     <div className="overflow-x-auto sap-scroll">
-      <table className="w-full min-w-[720px] border-collapse">
+      <table className="w-full min-w-[780px] border-collapse">
         <thead>
           <tr className="border-b border-sap-border bg-sap-bg/60 text-left">
             {columns.map((col) => (
@@ -67,6 +67,7 @@ export default function DepartmentTable({
                 <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-sap-text">{dept.name}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{dept.code}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{dept.businessUnitName}</td>
+                <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{dept.departmentType}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm text-sap-text-muted">{dept.head}</td>
                 <td className="whitespace-nowrap px-4 py-3 text-sm">
                   <Badge tone={dept.status === 'Active' ? 'success' : 'danger'} dot>

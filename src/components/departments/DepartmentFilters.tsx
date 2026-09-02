@@ -1,24 +1,29 @@
 import Select from '../common/Select'
 import { dummyBusinessUnits } from '../../data/dummyBusinessUnits'
-import type { DepartmentStatus } from '../../types/department'
+import { DEPARTMENT_TYPE_OPTIONS } from '../../types/department'
+import type { DepartmentStatus, DepartmentType } from '../../types/department'
 
 interface DepartmentFiltersProps {
   status: DepartmentStatus | 'All'
   businessUnitId: string | 'All'
+  departmentType: DepartmentType | 'All'
   sortBy: 'name' | 'createdAt'
   sortDir: 'asc' | 'desc'
   onStatusChange: (status: DepartmentStatus | 'All') => void
   onBusinessUnitChange: (businessUnitId: string | 'All') => void
+  onDepartmentTypeChange: (departmentType: DepartmentType | 'All') => void
   onSortChange: (sortBy: 'name' | 'createdAt', sortDir: 'asc' | 'desc') => void
 }
 
 export default function DepartmentFilters({
   status,
   businessUnitId,
+  departmentType,
   sortBy,
   sortDir,
   onStatusChange,
   onBusinessUnitChange,
+  onDepartmentTypeChange,
   onSortChange,
 }: DepartmentFiltersProps) {
   return (
@@ -41,6 +46,12 @@ export default function DepartmentFilters({
           { label: 'All Business Units', value: 'All' },
           ...dummyBusinessUnits.map((u) => ({ label: u.name, value: u.id })),
         ]}
+      />
+      <Select
+        aria-label="Filter by type"
+        value={departmentType}
+        onChange={(e) => onDepartmentTypeChange(e.target.value as DepartmentType | 'All')}
+        options={[{ label: 'All Types', value: 'All' }, ...DEPARTMENT_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))]}
       />
       <Select
         aria-label="Sort departments"
