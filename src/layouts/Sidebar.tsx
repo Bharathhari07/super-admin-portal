@@ -7,6 +7,7 @@ import {
   ShieldCheck as RolesIcon,
   KeyRound,
   Link2,
+  Lock,
   LayoutGrid,
   Building,
   Boxes,
@@ -27,6 +28,7 @@ const topLevelItems = [
   { to: '/roles', label: 'Roles', icon: RolesIcon },
   { to: '/permissions', label: 'Permissions', icon: KeyRound },
   { to: '/role-assignments', label: 'Role Assignments', icon: Link2 },
+  { to: '/data-permissions', label: 'Data Permissions', icon: Lock },
 ]
 
 const orgSubItems = [

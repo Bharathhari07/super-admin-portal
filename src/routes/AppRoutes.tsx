@@ -13,6 +13,7 @@ import UserManagementPage from '../pages/UserManagementPage'
 import RolesPage from '../pages/RolesPage'
 import PermissionsPage from '../pages/PermissionsPage'
 import RoleAssignmentsPage from '../pages/RoleAssignmentsPage'
+import DataPermissionsPage from '../pages/DataPermissionsPage'
 
 export default function AppRoutes() {
   return (
@@ -32,6 +33,7 @@ export default function AppRoutes() {
         <Route path="roles" element={<RolesPage />} />
         <Route path="permissions" element={<PermissionsPage />} />
         <Route path="role-assignments" element={<RoleAssignmentsPage />} />
+        <Route path="data-permissions" element={<DataPermissionsPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>
