@@ -5,6 +5,7 @@ import {
   Building2,
   Users,
   ShieldCheck as RolesIcon,
+  KeyRound,
   LayoutGrid,
   Building,
   Boxes,
@@ -23,6 +24,7 @@ const topLevelItems = [
   { to: '/tenants', label: 'Tenant Management', icon: Building2 },
   { to: '/users', label: 'User Management', icon: Users },
   { to: '/roles', label: 'Roles', icon: RolesIcon },
+  { to: '/permissions', label: 'Permissions', icon: KeyRound },
 ]
 
 const orgSubItems = [
