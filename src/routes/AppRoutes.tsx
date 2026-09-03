@@ -16,6 +16,8 @@ import RoleAssignmentsPage from '../pages/RoleAssignmentsPage'
 import DataPermissionsPage from '../pages/DataPermissionsPage'
 import PlatformConfigurationPage from '../pages/PlatformConfigurationPage'
 import FeatureManagementPage from '../pages/FeatureManagementPage'
+import LicenseManagementPage from '../pages/LicenseManagementPage'
+import SecurityPage from '../pages/SecurityPage'
 
 export default function AppRoutes() {
   return (
@@ -38,6 +40,8 @@ export default function AppRoutes() {
         <Route path="data-permissions" element={<DataPermissionsPage />} />
         <Route path="platform-configuration" element={<PlatformConfigurationPage />} />
         <Route path="feature-management" element={<FeatureManagementPage />} />
+        <Route path="license-management" element={<LicenseManagementPage />} />
+        <Route path="security" element={<SecurityPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>

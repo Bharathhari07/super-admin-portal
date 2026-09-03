@@ -10,6 +10,8 @@ import {
   Lock,
   Settings,
   ToggleLeft,
+  BadgeCheck,
+  ShieldAlert,
   LayoutGrid,
   Building,
   Boxes,
@@ -33,6 +35,8 @@ const topLevelItems = [
   { to: '/data-permissions', label: 'Data Permissions', icon: Lock },
   { to: '/platform-configuration', label: 'Platform Configuration', icon: Settings },
   { to: '/feature-management', label: 'Feature Management', icon: ToggleLeft },
+  { to: '/license-management', label: 'Subscription & License', icon: BadgeCheck },
+  { to: '/security', label: 'Security', icon: ShieldAlert },
 ]
 
 const orgSubItems = [
