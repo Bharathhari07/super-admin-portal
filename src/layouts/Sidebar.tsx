@@ -8,6 +8,8 @@ import {
   KeyRound,
   Link2,
   Lock,
+  Settings,
+  ToggleLeft,
   LayoutGrid,
   Building,
   Boxes,
@@ -29,6 +31,8 @@ const topLevelItems = [
   { to: '/permissions', label: 'Permissions', icon: KeyRound },
   { to: '/role-assignments', label: 'Role Assignments', icon: Link2 },
   { to: '/data-permissions', label: 'Data Permissions', icon: Lock },
+  { to: '/platform-configuration', label: 'Platform Configuration', icon: Settings },
+  { to: '/feature-management', label: 'Feature Management', icon: ToggleLeft },
 ]
 
 const orgSubItems = [
