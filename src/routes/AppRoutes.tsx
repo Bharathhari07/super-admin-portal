@@ -10,6 +10,7 @@ import BranchesPage from '../pages/BranchesPage'
 import CostCentersPage from '../pages/CostCentersPage'
 import LocationsPage from '../pages/LocationsPage'
 import UserManagementPage from '../pages/UserManagementPage'
+import RolesPage from '../pages/RolesPage'
 
 export default function AppRoutes() {
   return (
@@ -26,6 +27,7 @@ export default function AppRoutes() {
         <Route path="organizations/cost-centers" element={<CostCentersPage />} />
         <Route path="organizations/locations" element={<LocationsPage />} />
         <Route path="users" element={<UserManagementPage />} />
+        <Route path="roles" element={<RolesPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>

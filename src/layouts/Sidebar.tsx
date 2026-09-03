@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Building2,
   Users,
+  ShieldCheck as RolesIcon,
   LayoutGrid,
   Building,
   Boxes,
@@ -21,6 +22,7 @@ const topLevelItems = [
   { to: '/dashboard', label: 'Global Dashboard', icon: LayoutDashboard },
   { to: '/tenants', label: 'Tenant Management', icon: Building2 },
   { to: '/users', label: 'User Management', icon: Users },
+  { to: '/roles', label: 'Roles', icon: RolesIcon },
 ]
 
 const orgSubItems = [
