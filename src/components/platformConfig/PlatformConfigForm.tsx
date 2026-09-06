@@ -59,15 +59,15 @@ export default function PlatformConfigForm({ config, onSaved }: PlatformConfigFo
       <div className="rounded-xl border border-sap-border bg-sap-surface p-5 shadow-sm">
         <h4 className="mb-4 text-sm font-semibold text-sap-text">General Settings</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="defaultLanguage" label="Default Language" value={form.defaultLanguage} onChange={(e) => updateField('defaultLanguage', e.target.value)} options={LANGUAGE_OPTIONS.map((l) => ({ label: l, value: l }))} />
             <Select id="defaultTimeZone" label="Default Time Zone" value={form.defaultTimeZone} onChange={(e) => updateField('defaultTimeZone', e.target.value)} options={TIME_ZONE_OPTIONS.map((t) => ({ label: t, value: t }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="defaultCurrency" label="Default Currency" value={form.defaultCurrency} onChange={(e) => updateField('defaultCurrency', e.target.value)} options={CURRENCY_OPTIONS.map((c) => ({ label: c, value: c }))} />
             <Select id="dateFormat" label="Date Format" value={form.dateFormat} onChange={(e) => updateField('dateFormat', e.target.value as DateFormat)} options={DATE_FORMAT_OPTIONS.map((d) => ({ label: d, value: d }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="timeFormat" label="Time Format" value={form.timeFormat} onChange={(e) => updateField('timeFormat', e.target.value as TimeFormat)} options={TIME_FORMAT_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="numberFormat" label="Number Format" value={form.numberFormat} onChange={(e) => updateField('numberFormat', e.target.value as NumberFormat)} options={NUMBER_FORMAT_OPTIONS.map((n) => ({ label: n, value: n }))} />
           </div>
@@ -77,7 +77,7 @@ export default function PlatformConfigForm({ config, onSaved }: PlatformConfigFo
       <div className="rounded-xl border border-sap-border bg-sap-surface p-5 shadow-sm">
         <h4 className="mb-4 text-sm font-semibold text-sap-text">Session & Security Settings</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="sessionTimeoutMinutes" label="Session Timeout (minutes)" type="number" value={form.sessionTimeoutMinutes} onChange={(e) => updateField('sessionTimeoutMinutes', e.target.value)} />
             <Input id="passwordExpiryDays" label="Password Expiry (days)" type="number" value={form.passwordExpiryDays} onChange={(e) => updateField('passwordExpiryDays', e.target.value)} />
           </div>
@@ -102,11 +102,11 @@ export default function PlatformConfigForm({ config, onSaved }: PlatformConfigFo
       <div className="rounded-xl border border-sap-border bg-sap-surface p-5 shadow-sm">
         <h4 className="mb-4 text-sm font-semibold text-sap-text">Platform Branding</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="brandName" label="Brand Name" value={form.brandName} onChange={(e) => updateField('brandName', e.target.value)} />
             <Input id="applicationName" label="Application Name" value={form.applicationName} onChange={(e) => updateField('applicationName', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="companyName" label="Company Name" value={form.companyName} onChange={(e) => updateField('companyName', e.target.value)} />
             <Select id="brandingStatus" label="Branding Status" value={form.brandingStatus} onChange={(e) => updateField('brandingStatus', e.target.value as BrandingStatus)} options={[{ label: 'Active', value: 'Active' }, { label: 'Inactive', value: 'Inactive' }]} />
           </div>
@@ -114,11 +114,11 @@ export default function PlatformConfigForm({ config, onSaved }: PlatformConfigFo
           <p className="pt-2 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">
             Assets (image URLs - no file storage backend available)
           </p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="platformLogoUrl" label="Platform Logo URL" value={form.platformLogoUrl} onChange={(e) => updateField('platformLogoUrl', e.target.value)} placeholder="https://example.com/logo.png" />
             <Input id="faviconUrl" label="Favicon URL" value={form.faviconUrl} onChange={(e) => updateField('faviconUrl', e.target.value)} placeholder="https://example.com/favicon.ico" />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="loginBackgroundUrl" label="Login Background URL (optional)" value={form.loginBackgroundUrl} onChange={(e) => updateField('loginBackgroundUrl', e.target.value)} />
             <Input id="emailLogoUrl" label="Email Logo URL (optional)" value={form.emailLogoUrl} onChange={(e) => updateField('emailLogoUrl', e.target.value)} />
           </div>
@@ -148,7 +148,7 @@ export default function PlatformConfigForm({ config, onSaved }: PlatformConfigFo
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="fontFamily" label="Font Family" value={form.fontFamily} onChange={(e) => updateField('fontFamily', e.target.value)} options={FONT_FAMILY_OPTIONS.map((f) => ({ label: f, value: f }))} />
             <Select id="themeMode" label="Theme Mode" value={form.themeMode} onChange={(e) => updateField('themeMode', e.target.value as ThemeMode)} options={THEME_MODE_OPTIONS.map((t) => ({ label: t, value: t }))} />
           </div>

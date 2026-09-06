@@ -145,11 +145,11 @@ export default function PermissionForm({ permission, onSuccess, onCancel }: Perm
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Permission Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="code" label="Permission Code" value={form.code} onChange={(e) => updateField('code', e.target.value.toUpperCase())} error={errors.code} />
             <Input id="name" label="Permission Name" value={form.name} onChange={(e) => updateField('name', e.target.value)} error={errors.name} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="permissionCategory" label="Permission Category" value={form.permissionCategory} onChange={(e) => updateField('permissionCategory', e.target.value as PermissionCategory)} options={PERMISSION_CATEGORY_OPTIONS.map((c) => ({ label: c, value: c }))} />
             <Select id="module" label="Module" value={form.module} onChange={(e) => updateField('module', e.target.value as PlatformModule)} options={MODULE_OPTIONS.map((m) => ({ label: m, value: m }))} />
           </div>
@@ -160,7 +160,7 @@ export default function PermissionForm({ permission, onSuccess, onCancel }: Perm
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Access Configuration</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="permissionType" label="Permission Type" value={form.permissionType} onChange={(e) => updateField('permissionType', e.target.value as PermissionType)} options={PERMISSION_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="accessLevel" label="Access Level" value={form.accessLevel} onChange={(e) => updateField('accessLevel', e.target.value as AccessLevel)} options={ACCESS_LEVEL_OPTIONS.map((a) => ({ label: a, value: a }))} />
           </div>
@@ -169,7 +169,7 @@ export default function PermissionForm({ permission, onSuccess, onCancel }: Perm
             <input type="checkbox" checked={form.isDefaultPermission} onChange={(e) => updateField('isDefaultPermission', e.target.checked)} className="h-4 w-4 rounded border-sap-border" />
             Default Permission
           </label>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="effectiveDate" label="Effective Date" type="date" value={form.effectiveDate} onChange={(e) => updateField('effectiveDate', e.target.value)} error={errors.effectiveDate} />
             <Input id="expiryDate" label="Expiry Date (optional)" type="date" value={form.expiryDate} onChange={(e) => updateField('expiryDate', e.target.value)} />
           </div>

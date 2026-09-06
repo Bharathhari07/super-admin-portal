@@ -57,15 +57,15 @@ export default function TenantDetailsModal({ tenantId, onClose, onEdit }: Tenant
             <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">
               Tenant Information
             </h4>
-            <dl className="grid grid-cols-2 gap-y-2 text-sm">
+            <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
               <dt className="text-sap-text-muted">Organization Type</dt>
-              <dd className="text-sap-text">{tenant.organizationType}</dd>
+              <dd className="text-sap-text break-words">{tenant.organizationType}</dd>
               <dt className="text-sap-text-muted">Registration Number</dt>
-              <dd className="text-sap-text">{tenant.businessRegistrationNumber}</dd>
+              <dd className="text-sap-text break-words">{tenant.businessRegistrationNumber}</dd>
               <dt className="text-sap-text-muted">Plan</dt>
-              <dd className="text-sap-text">{tenant.plan}</dd>
+              <dd className="text-sap-text break-words">{tenant.plan}</dd>
               <dt className="text-sap-text-muted">Created</dt>
-              <dd className="text-sap-text">{tenant.createdAt}</dd>
+              <dd className="text-sap-text break-words">{tenant.createdAt}</dd>
             </dl>
           </div>
 
@@ -75,19 +75,19 @@ export default function TenantDetailsModal({ tenantId, onClose, onEdit }: Tenant
             <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">
               Admin & Contact
             </h4>
-            <dl className="grid grid-cols-2 gap-y-2 text-sm">
+            <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
               <dt className="text-sap-text-muted">Admin</dt>
-              <dd className="text-sap-text">{tenant.adminName}</dd>
+              <dd className="text-sap-text break-words">{tenant.adminName}</dd>
               <dt className="text-sap-text-muted">Email</dt>
-              <dd className="text-sap-text">{tenant.adminEmail}</dd>
+              <dd className="text-sap-text break-all">{tenant.adminEmail}</dd>
               <dt className="text-sap-text-muted">Phone</dt>
-              <dd className="text-sap-text">{tenant.phone}</dd>
+              <dd className="text-sap-text break-words">{tenant.phone}</dd>
               <dt className="text-sap-text-muted">Telephone</dt>
-              <dd className="text-sap-text">{tenant.telephone || '-'}</dd>
+              <dd className="text-sap-text break-words">{tenant.telephone || '-'}</dd>
               <dt className="text-sap-text-muted">Website</dt>
-              <dd className="text-sap-text">{tenant.website || '-'}</dd>
+              <dd className="text-sap-text break-all">{tenant.website || '-'}</dd>
               <dt className="text-sap-text-muted">Time Zone</dt>
-              <dd className="text-sap-text">{tenant.timeZone}</dd>
+              <dd className="text-sap-text break-words">{tenant.timeZone}</dd>
             </dl>
           </div>
 

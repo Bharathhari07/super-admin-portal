@@ -133,11 +133,11 @@ export default function RoleForm({ role, onSuccess, onCancel }: RoleFormProps) {
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Role Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="code" label="Role Code" value={form.code} onChange={(e) => updateField('code', e.target.value.toUpperCase())} error={errors.code} />
             <Input id="name" label="Role Name" value={form.name} onChange={(e) => updateField('name', e.target.value)} error={errors.name} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="roleCategory" label="Role Category" value={form.roleCategory} onChange={(e) => updateField('roleCategory', e.target.value as RoleCategory)} options={ROLE_CATEGORY_OPTIONS.map((c) => ({ label: c, value: c }))} />
             <Select id="status" label="Status" value={form.status} onChange={(e) => updateField('status', e.target.value as RoleStatus)} options={[{ label: 'Active', value: 'Active' }, { label: 'Inactive', value: 'Inactive' }]} />
           </div>
@@ -159,11 +159,11 @@ export default function RoleForm({ role, onSuccess, onCancel }: RoleFormProps) {
               Assignable
             </label>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="priorityLevel" label="Priority Level (optional)" type="number" value={form.priorityLevel} onChange={(e) => updateField('priorityLevel', e.target.value)} />
             <Input id="maximumUsers" label="Maximum Users (optional)" type="number" value={form.maximumUsers} onChange={(e) => updateField('maximumUsers', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="effectiveDate" label="Effective Date" type="date" value={form.effectiveDate} onChange={(e) => updateField('effectiveDate', e.target.value)} error={errors.effectiveDate} />
             <Input id="expiryDate" label="Expiry Date (optional)" type="date" value={form.expiryDate} onChange={(e) => updateField('expiryDate', e.target.value)} />
           </div>

@@ -13,13 +13,20 @@
   --color-sap-success-bg: rgba(52, 211, 153, 0.15);
   --color-sap-danger: #f87171;
   --color-sap-danger-bg: rgba(248, 113, 113, 0.15);
-  --color-sap-warning: #FCE300;     /* bright yellow reads fine on dark cards */
+  --color-sap-warning: #FCE300;
   --color-sap-warning-bg: rgba(252, 227, 0, 0.12);
-  --color-sap-info: #b8a9e8;        /* soft lavender - Legion Ink tint */
+  --color-sap-info: #b8a9e8;
   --color-sap-info-bg: rgba(184, 169, 232, 0.15);
-  --color-sap-text: #f5f3fa;        /* near-white body text */
-  --color-sap-text-muted: #a99fc2;  /* muted lavender-gray */
+  --color-sap-text: #f5f3fa;
+  --color-sap-text-muted: #a99fc2;
   --color-sap-border: rgba(255, 255, 255, 0.09);
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -30,23 +37,25 @@ body {
   color: var(--color-sap-text);
 }
 
-/* Marbled black + Legion Ink swirl, used on the header banner */
-.sap-marble {
-  background:
-    radial-gradient(circle at 15% 25%, rgba(0, 0, 0, 0.6) 0%, transparent 40%),
-    radial-gradient(circle at 75% 15%, rgba(61, 36, 114, 0.65) 0%, transparent 45%),
-    radial-gradient(circle at 35% 85%, rgba(0, 0, 0, 0.55) 0%, transparent 50%),
-    radial-gradient(circle at 90% 75%, rgba(42, 22, 85, 0.75) 0%, transparent 45%),
-    linear-gradient(135deg, #0b0714 0%, #2A1655 50%, #120a24 100%);
-  background-blend-mode: screen, screen, screen, screen, normal;
+/* Touch-friendly and responsive scrollbar */
+.sap-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
-/* Scrollbar polish for tables */
 .sap-scroll::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+  height: 6px;
+  width: 6px;
 }
+
 .sap-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.18);
   border-radius: 9999px;
+}
+
+/* Ensure all tables scroll horizontally on small screens without breaking container */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
 }

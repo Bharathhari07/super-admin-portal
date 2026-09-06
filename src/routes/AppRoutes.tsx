@@ -18,6 +18,8 @@ import PlatformConfigurationPage from '../pages/PlatformConfigurationPage'
 import FeatureManagementPage from '../pages/FeatureManagementPage'
 import LicenseManagementPage from '../pages/LicenseManagementPage'
 import SecurityPage from '../pages/SecurityPage'
+import AuditLogsPage from '../pages/AuditLogsPage'
+import NotificationsPage from '../pages/NotificationsPage'
 
 export default function AppRoutes() {
   return (
@@ -42,6 +44,8 @@ export default function AppRoutes() {
         <Route path="feature-management" element={<FeatureManagementPage />} />
         <Route path="license-management" element={<LicenseManagementPage />} />
         <Route path="security" element={<SecurityPage />} />
+        <Route path="audit-logs" element={<AuditLogsPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Route>
     </Routes>

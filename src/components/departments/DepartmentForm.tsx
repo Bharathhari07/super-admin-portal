@@ -150,18 +150,18 @@ export default function DepartmentForm({ department, onSuccess, onCancel }: Depa
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Department Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="companyId" label="Company" value={form.companyId} onChange={(e) => handleCompanyChange(e.target.value)} options={dummyCompanies.map((c) => ({ label: c.companyName, value: c.id }))} />
             <div>
               <Select id="businessUnitId" label="Business Unit" value={form.businessUnitId} onChange={(e) => updateField('businessUnitId', e.target.value)} options={availableBUs.map((u) => ({ label: u.name, value: u.id }))} />
               {errors.businessUnitId && <p className="mt-1 text-xs text-sap-danger">{errors.businessUnitId}</p>}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="name" label="Department Name" value={form.name} onChange={(e) => updateField('name', e.target.value)} error={errors.name} />
             <Input id="code" label="Department Code" value={form.code} onChange={(e) => updateField('code', e.target.value.toUpperCase())} error={errors.code} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="departmentType" label="Department Type" value={form.departmentType} onChange={(e) => updateField('departmentType', e.target.value as DepartmentType)} options={DEPARTMENT_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="status" label="Status" value={form.status} onChange={(e) => updateField('status', e.target.value as DepartmentStatus)} options={[{ label: 'Active', value: 'Active' }, { label: 'Inactive', value: 'Inactive' }]} />
           </div>
@@ -172,15 +172,15 @@ export default function DepartmentForm({ department, onSuccess, onCancel }: Depa
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Head & Contact</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="head" label="Department Head" value={form.head} onChange={(e) => updateField('head', e.target.value)} error={errors.head} />
             <Input id="deputyHead" label="Deputy Head (optional)" value={form.deputyHead} onChange={(e) => updateField('deputyHead', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="contactEmail" label="Contact Email" type="email" value={form.contactEmail} onChange={(e) => updateField('contactEmail', e.target.value)} />
             <Input id="contactNumber" label="Contact Number" type="tel" value={form.contactNumber} onChange={(e) => updateField('contactNumber', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="effectiveDate" label="Effective Date" type="date" value={form.effectiveDate} onChange={(e) => updateField('effectiveDate', e.target.value)} error={errors.effectiveDate} />
             <Input id="endDate" label="End Date (optional)" type="date" value={form.endDate} onChange={(e) => updateField('endDate', e.target.value)} />
           </div>
@@ -190,7 +190,7 @@ export default function DepartmentForm({ department, onSuccess, onCancel }: Depa
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Location & Operations</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="branchId" label="Branch" value={form.branchId} onChange={(e) => updateField('branchId', e.target.value)} options={[{ label: 'Select branch', value: '' }, ...availableBranches.map((b) => ({ label: b.name, value: b.id }))]} />
             <Select id="costCenterId" label="Cost Center (optional)" value={form.costCenterId} onChange={(e) => updateField('costCenterId', e.target.value)} options={[{ label: 'None', value: '' }, ...availableCostCenters.map((c) => ({ label: c.name, value: c.id }))]} />
           </div>

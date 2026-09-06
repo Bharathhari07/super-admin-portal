@@ -183,22 +183,22 @@ export default function CostCenterForm({ center, onSuccess, onCancel }: CostCent
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Cost Center Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="companyId" label="Company" value={form.companyId} onChange={(e) => handleCompanyChange(e.target.value)} options={dummyCompanies.map((c) => ({ label: c.companyName, value: c.id }))} />
             <div>
               <Select id="businessUnitId" label="Business Unit" value={form.businessUnitId} onChange={(e) => handleBusinessUnitChange(e.target.value)} options={availableBUs.map((u) => ({ label: u.name, value: u.id }))} />
               {errors.businessUnitId && <p className="mt-1 text-xs text-sap-danger">{errors.businessUnitId}</p>}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="departmentId" label="Department (optional)" value={form.departmentId} onChange={(e) => updateField('departmentId', e.target.value)} options={[{ label: 'None', value: '' }, ...availableDepartments.map((d) => ({ label: d.name, value: d.id }))]} />
             <Select id="branchId" label="Branch (optional)" value={form.branchId} onChange={(e) => updateField('branchId', e.target.value)} options={[{ label: 'None', value: '' }, ...availableBranches.map((b) => ({ label: b.name, value: b.id }))]} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="name" label="Cost Center Name" value={form.name} onChange={(e) => updateField('name', e.target.value)} error={errors.name} />
             <Input id="code" label="Cost Center Code" value={form.code} onChange={(e) => updateField('code', e.target.value.toUpperCase())} error={errors.code} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="costCenterType" label="Cost Center Type" value={form.costCenterType} onChange={(e) => updateField('costCenterType', e.target.value as CostCenterType)} options={COST_CENTER_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="status" label="Status" value={form.status} onChange={(e) => updateField('status', e.target.value as CostCenterStatus)} options={[{ label: 'Active', value: 'Active' }, { label: 'Inactive', value: 'Inactive' }]} />
           </div>
@@ -210,11 +210,11 @@ export default function CostCenterForm({ center, onSuccess, onCancel }: CostCent
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Budget Information</h4>
         <div className="space-y-4">
           <Input id="budgetOwner" label="Budget Owner" value={form.budgetOwner} onChange={(e) => updateField('budgetOwner', e.target.value)} error={errors.budgetOwner} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="budgetAllocation" label="Budget Amount" type="number" value={form.budgetAllocation} onChange={(e) => updateField('budgetAllocation', e.target.value)} error={errors.budgetAllocation} />
             <Select id="currency" label="Currency" value={form.currency} onChange={(e) => updateField('currency', e.target.value)} options={CURRENCY_OPTIONS.map((c) => ({ label: c, value: c }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="budgetPeriod" label="Budget Period" value={form.budgetPeriod} onChange={(e) => updateField('budgetPeriod', e.target.value as BudgetPeriod)} options={BUDGET_PERIOD_OPTIONS.map((p) => ({ label: p, value: p }))} />
             <Select id="financialYear" label="Financial Year" value={form.financialYear} onChange={(e) => updateField('financialYear', e.target.value)} options={FINANCIAL_YEAR_OPTIONS.map((f) => ({ label: f, value: f }))} />
           </div>

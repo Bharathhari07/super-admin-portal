@@ -218,15 +218,15 @@ export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Personal Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="firstName" label="First Name" value={form.firstName} onChange={(e) => updateField('firstName', e.target.value)} error={errors.firstName} />
             <Input id="middleName" label="Middle Name (optional)" value={form.middleName} onChange={(e) => updateField('middleName', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="lastName" label="Last Name" value={form.lastName} onChange={(e) => updateField('lastName', e.target.value)} error={errors.lastName} />
             <Select id="gender" label="Gender (optional)" value={form.gender} onChange={(e) => updateField('gender', e.target.value as Gender)} options={GENDER_OPTIONS.map((g) => ({ label: g, value: g }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="employeeId" label="Employee ID" value={form.employeeId} onChange={(e) => updateField('employeeId', e.target.value.toUpperCase())} error={errors.employeeId} />
             <Input id="dateOfBirth" label="Date of Birth (optional)" type="date" value={form.dateOfBirth} onChange={(e) => updateField('dateOfBirth', e.target.value)} />
           </div>
@@ -236,11 +236,11 @@ export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Contact Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="email" label="Email Address" type="email" value={form.email} onChange={(e) => updateField('email', e.target.value)} error={errors.email} />
             <Input id="mobile" label="Mobile Number" type="tel" value={form.mobile} onChange={(e) => updateField('mobile', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="alternateEmail" label="Alternate Email (optional)" type="email" value={form.alternateEmail} onChange={(e) => updateField('alternateEmail', e.target.value)} />
             <Input id="alternateMobile" label="Alternate Mobile (optional)" type="tel" value={form.alternateMobile} onChange={(e) => updateField('alternateMobile', e.target.value)} />
           </div>
@@ -250,12 +250,12 @@ export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Account Setup</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="username" label="Username" value={form.username} onChange={(e) => updateField('username', e.target.value)} error={errors.username} />
             <Select id="authenticationMethod" label="Authentication Method" value={form.authenticationMethod} onChange={(e) => updateField('authenticationMethod', e.target.value as AuthenticationMethod)} options={AUTHENTICATION_METHOD_OPTIONS.map((m) => ({ label: m, value: m }))} />
           </div>
           {!user && (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
               <Input id="temporaryPassword" label="Temporary Password (optional - auto-generated if blank)" value={form.temporaryPassword} onChange={(e) => updateField('temporaryPassword', e.target.value)} />
               <Select id="status" label="Account Status" value={form.status} onChange={(e) => updateField('status', e.target.value as UserAccountStatus)} options={[{ label: 'Pending Activation', value: 'Pending Activation' }, { label: 'Active', value: 'Active' }, { label: 'Inactive', value: 'Inactive' }, { label: 'Locked', value: 'Locked' }]} />
             </div>
@@ -266,11 +266,11 @@ export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Organization Assignment</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="companyId" label="Company" value={form.companyId} onChange={(e) => handleCompanyChange(e.target.value)} options={dummyCompanies.map((c) => ({ label: c.companyName, value: c.id }))} />
             <Select id="businessUnitId" label="Business Unit" value={form.businessUnitId} onChange={(e) => handleBusinessUnitChange(e.target.value)} options={availableBUs.map((u) => ({ label: u.name, value: u.id }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="departmentId" label="Department" value={form.departmentId} onChange={(e) => updateField('departmentId', e.target.value)} options={availableDepartments.map((d) => ({ label: d.name, value: d.id }))} />
             <Select id="branchId" label="Branch" value={form.branchId} onChange={(e) => updateField('branchId', e.target.value)} options={availableBranches.map((b) => ({ label: b.name, value: b.id }))} />
           </div>
@@ -281,11 +281,11 @@ export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Employment Details</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="designation" label="Designation" value={form.designation} onChange={(e) => updateField('designation', e.target.value)} />
             <Input id="reportingManager" label="Reporting Manager (optional)" value={form.reportingManager} onChange={(e) => updateField('reportingManager', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="employmentType" label="Employment Type" value={form.employmentType} onChange={(e) => updateField('employmentType', e.target.value as EmploymentType)} options={EMPLOYMENT_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Input id="joiningDate" label="Joining Date" type="date" value={form.joiningDate} onChange={(e) => updateField('joiningDate', e.target.value)} />
           </div>

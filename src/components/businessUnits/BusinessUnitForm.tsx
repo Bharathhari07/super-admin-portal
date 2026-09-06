@@ -152,11 +152,11 @@ export default function BusinessUnitForm({ unit, onSuccess, onCancel }: Business
             />
             {errors.companyId && <p className="mt-1 text-xs text-sap-danger">{errors.companyId}</p>}
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="name" label="Business Unit Name" value={form.name} onChange={(e) => updateField('name', e.target.value)} error={errors.name} />
             <Input id="code" label="Business Unit Code" value={form.code} onChange={(e) => updateField('code', e.target.value.toUpperCase())} error={errors.code} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="businessUnitType" label="Business Unit Type" value={form.businessUnitType} onChange={(e) => updateField('businessUnitType', e.target.value as BusinessUnitType)} options={BUSINESS_UNIT_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="status" label="Status" value={form.status} onChange={(e) => updateField('status', e.target.value as BusinessUnitStatus)} options={[{ label: 'Active', value: 'Active' }, { label: 'Inactive', value: 'Inactive' }]} />
           </div>
@@ -167,15 +167,15 @@ export default function BusinessUnitForm({ unit, onSuccess, onCancel }: Business
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Head & Contact</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="head" label="Business Unit Head" value={form.head} onChange={(e) => updateField('head', e.target.value)} error={errors.head} />
             <Input id="email" label="Email Address" type="email" value={form.email} onChange={(e) => updateField('email', e.target.value)} error={errors.email} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="contactNumber" label="Contact Number" type="tel" value={form.contactNumber} onChange={(e) => updateField('contactNumber', e.target.value)} />
             <Select id="region" label="Region" value={form.region} onChange={(e) => updateField('region', e.target.value)} options={REGION_OPTIONS.map((r) => ({ label: r, value: r }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="effectiveDate" label="Effective Date" type="date" value={form.effectiveDate} onChange={(e) => updateField('effectiveDate', e.target.value)} error={errors.effectiveDate} />
             <Input id="endDate" label="End Date (optional)" type="date" value={form.endDate} onChange={(e) => updateField('endDate', e.target.value)} />
           </div>
@@ -185,7 +185,7 @@ export default function BusinessUnitForm({ unit, onSuccess, onCancel }: Business
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Operational Settings</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="currency" label="Currency" value={form.currency} onChange={(e) => updateField('currency', e.target.value)} options={CURRENCY_OPTIONS.map((c) => ({ label: c, value: c }))} />
             <Select id="timeZone" label="Time Zone" value={form.timeZone} onChange={(e) => updateField('timeZone', e.target.value)} options={TIME_ZONE_OPTIONS.map((t) => ({ label: t, value: t }))} />
           </div>

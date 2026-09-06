@@ -15,8 +15,8 @@ export default function Pagination({ page, pageSize, total, onPageChange, itemLa
   const end = Math.min(page * pageSize, total)
 
   return (
-    <div className="flex flex-col items-center justify-center gap-3 border-t border-sap-border px-4 py-3 text-center">
-      <p className="text-sm text-sap-text-muted">
+    <div className="flex flex-col items-center justify-between gap-3 border-t border-sap-border px-3 py-3 sm:flex-row sm:px-4 text-center sm:text-left">
+      <p className="text-xs sm:text-sm text-sap-text-muted">
         Showing <span className="font-medium text-sap-text">{start}</span>-
         <span className="font-medium text-sap-text">{end}</span> of{' '}
         <span className="font-medium text-sap-text">{total}</span> {itemLabel}
@@ -27,10 +27,11 @@ export default function Pagination({ page, pageSize, total, onPageChange, itemLa
           size="sm"
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
+          className="h-8 px-2.5 text-xs sm:text-sm"
         >
           <ChevronLeft size={16} /> Prev
         </Button>
-        <span className="text-sm text-sap-text-muted">
+        <span className="px-1 text-xs sm:text-sm text-sap-text-muted">
           Page {page} of {totalPages}
         </span>
         <Button
@@ -38,6 +39,7 @@ export default function Pagination({ page, pageSize, total, onPageChange, itemLa
           size="sm"
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
+          className="h-8 px-2.5 text-xs sm:text-sm"
         >
           Next <ChevronRight size={16} />
         </Button>

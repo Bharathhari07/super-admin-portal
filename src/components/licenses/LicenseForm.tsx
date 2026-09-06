@@ -163,7 +163,7 @@ export default function LicenseForm({ license, onSuccess, onCancel }: LicenseFor
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">License Information</h4>
         <div className="space-y-4">
           <Input id="name" label="License Name" value={form.name} onChange={(e) => updateField('name', e.target.value)} error={errors.name} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="licenseType" label="License Type" value={form.licenseType} onChange={(e) => updateField('licenseType', e.target.value as LicenseType)} options={LICENSE_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="subscriptionPlan" label="Subscription Plan" value={form.subscriptionPlan} onChange={(e) => updateField('subscriptionPlan', e.target.value as SubscriptionPlan)} options={SUBSCRIPTION_PLAN_OPTIONS.map((p) => ({ label: p, value: p }))} />
           </div>
@@ -180,11 +180,11 @@ export default function LicenseForm({ license, onSuccess, onCancel }: LicenseFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Renewal Settings</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="startDate" label="Start Date" type="date" value={form.startDate} onChange={(e) => updateField('startDate', e.target.value)} error={errors.startDate} />
             <Input id="expiryDate" label="Expiry Date" type="date" value={form.expiryDate} onChange={(e) => updateField('expiryDate', e.target.value)} error={errors.expiryDate} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="gracePeriodDays" label="Grace Period (days)" type="number" value={form.gracePeriodDays} onChange={(e) => updateField('gracePeriodDays', e.target.value)} />
             <Select id="renewalType" label="Renewal Type" value={form.renewalType} onChange={(e) => updateField('renewalType', e.target.value as RenewalType)} options={RENEWAL_TYPE_OPTIONS.map((r) => ({ label: r, value: r }))} />
           </div>
@@ -195,15 +195,15 @@ export default function LicenseForm({ license, onSuccess, onCancel }: LicenseFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Usage Limits</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="maximumUsers" label="Maximum Users" type="number" value={form.maximumUsers} onChange={(e) => updateField('maximumUsers', e.target.value)} />
             <Input id="maximumStorageGb" label="Maximum Storage (GB)" type="number" value={form.maximumStorageGb} onChange={(e) => updateField('maximumStorageGb', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="maximumApiRequests" label="Maximum API Requests" type="number" value={form.maximumApiRequests} onChange={(e) => updateField('maximumApiRequests', e.target.value)} />
             <Input id="maximumOrganizations" label="Maximum Organizations" type="number" value={form.maximumOrganizations} onChange={(e) => updateField('maximumOrganizations', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="maximumBranches" label="Maximum Branches (optional)" type="number" value={form.maximumBranches} onChange={(e) => updateField('maximumBranches', e.target.value)} />
             <Input id="maximumActiveSessions" label="Maximum Active Sessions" type="number" value={form.maximumActiveSessions} onChange={(e) => updateField('maximumActiveSessions', e.target.value)} />
           </div>

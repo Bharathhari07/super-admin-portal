@@ -120,7 +120,7 @@ export default function RoleAssignmentForm({ assignment, onSuccess, onCancel }: 
         onChange={(e) => updateField('organizationScope', e.target.value as AssignmentOrgScope)}
         options={ASSIGNMENT_ORG_SCOPE_OPTIONS.map((s) => ({ label: s, value: s }))}
       />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
         <Input id="effectiveDate" label="Effective Date" type="date" value={form.effectiveDate} onChange={(e) => updateField('effectiveDate', e.target.value)} error={errors.effectiveDate} />
         <Input id="expiryDate" label="Expiry Date (optional)" type="date" value={form.expiryDate} onChange={(e) => updateField('expiryDate', e.target.value)} />
       </div>

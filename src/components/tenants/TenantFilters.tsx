@@ -21,7 +21,7 @@ export default function TenantFilters({
   onSortChange,
 }: TenantFiltersProps) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+    <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 w-full xl:w-auto">
       <Select
         aria-label="Filter by status"
         value={status}

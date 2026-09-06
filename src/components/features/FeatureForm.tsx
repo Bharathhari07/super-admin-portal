@@ -139,11 +139,11 @@ export default function FeatureForm({ feature, onSuccess, onCancel }: FeatureFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Feature Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="name" label="Feature Name" value={form.name} onChange={(e) => updateField('name', e.target.value)} error={errors.name} />
             <Input id="code" label="Feature Code" value={form.code} onChange={(e) => updateField('code', e.target.value.toUpperCase())} error={errors.code} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="module" label="Module" value={form.module} onChange={(e) => updateField('module', e.target.value as PlatformModule)} options={MODULE_OPTIONS.map((m) => ({ label: m, value: m }))} />
             <Select id="featureCategory" label="Feature Category" value={form.featureCategory} onChange={(e) => updateField('featureCategory', e.target.value as FeatureCategory)} options={FEATURE_CATEGORY_OPTIONS.map((c) => ({ label: c, value: c }))} />
           </div>
@@ -170,7 +170,7 @@ export default function FeatureForm({ feature, onSuccess, onCancel }: FeatureFor
               Organization Enabled
             </label>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="subscriptionPlan" label="Subscription Plan" value={form.subscriptionPlan} onChange={(e) => updateField('subscriptionPlan', e.target.value as SubscriptionPlan)} options={SUBSCRIPTION_PLAN_OPTIONS.map((p) => ({ label: p, value: p }))} />
             <Input id="featureVersion" label="Feature Version" value={form.featureVersion} onChange={(e) => updateField('featureVersion', e.target.value)} error={errors.featureVersion} placeholder="e.g. 1.0.0" />
           </div>
@@ -181,11 +181,11 @@ export default function FeatureForm({ feature, onSuccess, onCancel }: FeatureFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Release</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="releaseType" label="Release Type" value={form.releaseType} onChange={(e) => updateField('releaseType', e.target.value as ReleaseType)} options={RELEASE_TYPE_OPTIONS.map((r) => ({ label: r, value: r }))} />
             <Select id="defaultStatus" label="Default Status" value={form.defaultStatus} onChange={(e) => updateField('defaultStatus', e.target.value as DefaultStatus)} options={[{ label: 'Enabled', value: 'Enabled' }, { label: 'Disabled', value: 'Disabled' }]} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="effectiveDate" label="Effective Date" type="date" value={form.effectiveDate} onChange={(e) => updateField('effectiveDate', e.target.value)} error={errors.effectiveDate} />
             <Input id="expiryDate" label="Expiry Date (optional)" type="date" value={form.expiryDate} onChange={(e) => updateField('expiryDate', e.target.value)} />
           </div>

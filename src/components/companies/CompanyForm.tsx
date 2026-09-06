@@ -179,15 +179,15 @@ export default function CompanyForm({ company, onSuccess, onCancel }: CompanyFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Company Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="companyName" label="Company Name" value={form.companyName} onChange={(e) => updateField('companyName', e.target.value)} error={errors.companyName} />
             <Input id="legalCompanyName" label="Legal Company Name" value={form.legalCompanyName} onChange={(e) => updateField('legalCompanyName', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="companyCode" label="Company Code" value={form.companyCode} onChange={(e) => updateField('companyCode', e.target.value.toUpperCase())} error={errors.companyCode} />
             <Select id="companyType" label="Company Type" value={form.companyType} onChange={(e) => updateField('companyType', e.target.value as CompanyType)} options={COMPANY_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="industry" label="Industry Type" value={form.industry} onChange={(e) => updateField('industry', e.target.value as Industry)} options={INDUSTRY_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="status" label="Company Status" value={form.status} onChange={(e) => updateField('status', e.target.value as CompanyStatus)} options={[{ label: 'Draft', value: 'Draft' }, { label: 'Active', value: 'Active' }, { label: 'Inactive', value: 'Inactive' }]} />
           </div>
@@ -197,15 +197,15 @@ export default function CompanyForm({ company, onSuccess, onCancel }: CompanyFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Legal Registration Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="registrationNumber" label="Business Registration Number" value={form.registrationNumber} onChange={(e) => updateField('registrationNumber', e.target.value)} error={errors.registrationNumber} />
             <Input id="gstVatNumber" label="GST / VAT Number" value={form.gstVatNumber} onChange={(e) => updateField('gstVatNumber', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="taxId" label="PAN / Tax Identification Number" value={form.taxId} onChange={(e) => updateField('taxId', e.target.value)} />
             <Input id="incorporationDate" label="Incorporation Date" type="date" value={form.incorporationDate} onChange={(e) => updateField('incorporationDate', e.target.value)} error={errors.incorporationDate} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="registrationCountry" label="Registration Country" value={form.registrationCountry} onChange={(e) => updateField('registrationCountry', e.target.value)} />
             <Select id="legalEntityType" label="Legal Entity Type" value={form.legalEntityType} onChange={(e) => updateField('legalEntityType', e.target.value as LegalEntityType)} options={LEGAL_ENTITY_TYPE_OPTIONS.map((t) => ({ label: t, value: t }))} />
           </div>
@@ -215,11 +215,11 @@ export default function CompanyForm({ company, onSuccess, onCancel }: CompanyFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Contact Information</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="primaryContactPerson" label="Primary Contact Person" value={form.primaryContactPerson} onChange={(e) => updateField('primaryContactPerson', e.target.value)} />
             <Input id="email" label="Official Email" type="email" value={form.email} onChange={(e) => updateField('email', e.target.value)} error={errors.email} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="mobile" label="Mobile Number" type="tel" value={form.mobile} onChange={(e) => updateField('mobile', e.target.value)} />
             <Input id="telephone" label="Telephone Number" type="tel" value={form.telephone} onChange={(e) => updateField('telephone', e.target.value)} />
           </div>
@@ -230,15 +230,15 @@ export default function CompanyForm({ company, onSuccess, onCancel }: CompanyFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Registered Address</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="addressLine1" label="Address Line 1" value={form.addressLine1} onChange={(e) => updateField('addressLine1', e.target.value)} />
             <Input id="addressLine2" label="Address Line 2" value={form.addressLine2} onChange={(e) => updateField('addressLine2', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="city" label="City" value={form.city} onChange={(e) => updateField('city', e.target.value)} />
             <Input id="state" label="State" value={form.state} onChange={(e) => updateField('state', e.target.value)} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="country" label="Country" value={form.country} onChange={(e) => updateField('country', e.target.value)} />
             <Input id="postalCode" label="Postal Code" value={form.postalCode} onChange={(e) => updateField('postalCode', e.target.value)} />
           </div>
@@ -248,15 +248,15 @@ export default function CompanyForm({ company, onSuccess, onCancel }: CompanyFor
       <div>
         <h4 className="mb-3 text-xs font-semibold uppercase tracking-wide text-sap-text-muted">Operational Configuration</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="defaultCurrency" label="Default Currency" value={form.defaultCurrency} onChange={(e) => updateField('defaultCurrency', e.target.value)} options={CURRENCY_OPTIONS.map((c) => ({ label: c, value: c }))} />
             <Select id="financialYear" label="Financial Year" value={form.financialYear} onChange={(e) => updateField('financialYear', e.target.value)} options={FINANCIAL_YEAR_OPTIONS.map((f) => ({ label: f, value: f }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="timeZone" label="Time Zone" value={form.timeZone} onChange={(e) => updateField('timeZone', e.target.value)} options={TIME_ZONE_OPTIONS.map((t) => ({ label: t, value: t }))} />
             <Select id="defaultLanguage" label="Default Language" value={form.defaultLanguage} onChange={(e) => updateField('defaultLanguage', e.target.value)} options={LANGUAGE_OPTIONS.map((l) => ({ label: l, value: l }))} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Select id="workingCalendar" label="Working Calendar" value={form.workingCalendar} onChange={(e) => updateField('workingCalendar', e.target.value)} options={WORKING_CALENDAR_OPTIONS.map((w) => ({ label: w, value: w }))} />
             <Input id="logoUrl" label="Company Logo (image URL)" value={form.logoUrl} onChange={(e) => updateField('logoUrl', e.target.value)} placeholder="https://example.com/logo.png" />
           </div>

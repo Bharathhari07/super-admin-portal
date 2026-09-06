@@ -43,7 +43,7 @@ export default function SecuritySettingsForm({ settings, onSaved }: SecuritySett
       <div className="rounded-xl border border-sap-border bg-sap-surface p-5 shadow-sm">
         <h4 className="mb-4 text-sm font-semibold text-sap-text">Password Policy</h4>
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
             <Input id="minimumPasswordLength" label="Minimum Password Length" type="number" value={form.minimumPasswordLength} onChange={(e) => updateField('minimumPasswordLength', e.target.value)} />
             <Input id="passwordHistoryCount" label="Password History Count" type="number" value={form.passwordHistoryCount} onChange={(e) => updateField('passwordHistoryCount', e.target.value)} />
           </div>
