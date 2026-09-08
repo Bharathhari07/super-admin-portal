@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Bell, UserCircle, Menu, ExternalLink, CheckCheck, X, LogOut } from 'lucide-react'
+import { Bell, UserCircle, Menu, ExternalLink, X, LogOut } from 'lucide-react'
 import { useNotifications } from '../hooks/queries/useNotifications'
-import { useMarkAllNotificationsRead } from '../hooks/mutations/useMarkAllNotificationsRead'
 import { useAuth } from '../context/AuthContext'
 
 interface HeaderProps {
@@ -40,7 +39,6 @@ export default function Header({ onMenuClick }: HeaderProps) {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const { data } = useNotifications({ pageSize: 4, sortBy: 'createdAt', sortDir: 'desc' })
-  const markAllRead = useMarkAllNotificationsRead()
 
   const notifications = data?.data ?? []
   const unreadCount = data?.unreadCount ?? 0
@@ -108,25 +106,12 @@ export default function Header({ onMenuClick }: HeaderProps) {
                     </span>
                   )}
                 </div>
-                <div className="flex items-center gap-1">
-                  {unreadCount > 0 && (
-                    <button
-                      onClick={() => markAllRead.mutate()}
-                      disabled={markAllRead.isPending}
-                      className="inline-flex items-center gap-1 text-xs text-sap-text-muted hover:text-sap-primary transition-colors"
-                      title="Mark all as read"
-                    >
-                      <CheckCheck size={14} />
-                      <span>Read all</span>
-                    </button>
-                  )}
-                  <button
-                    onClick={() => setDropdownOpen(false)}
-                    className="flex h-7 w-7 items-center justify-center rounded-md text-sap-text-muted hover:bg-sap-bg hover:text-white"
-                  >
-                    <X size={16} />
-                  </button>
-                </div>
+                <button
+                  onClick={() => setDropdownOpen(false)}
+                  className="flex h-7 w-7 items-center justify-center rounded-md text-sap-text-muted hover:bg-sap-bg hover:text-white"
+                >
+                  <X size={16} />
+                </button>
               </div>
 
               <div className="divide-y divide-sap-border/40 py-1 max-h-[60vh] overflow-y-auto sap-scroll">
