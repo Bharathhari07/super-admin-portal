@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ShieldCheck, Lock, User, Eye, EyeOff, ArrowRight, Sparkles, KeyRound } from 'lucide-react'
+import { ShieldCheck, Lock, User, Eye, EyeOff, ArrowRight, KeyRound } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/common/Button'
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('admin')
-  const [password, setPassword] = useState('admin123')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -18,7 +18,7 @@ export default function LoginPage() {
     setError('')
 
     if (!username.trim()) {
-      setError('Please enter your username or admin ID.')
+      setError('Please enter your username.')
       return
     }
 
@@ -29,7 +29,6 @@ export default function LoginPage() {
 
     setIsLoading(true)
 
-    // Check credentials (accepts admin / admin123 or admin / admin)
     setTimeout(() => {
       const validUsername = username.trim().toLowerCase() === 'admin'
       const validPassword = password === 'admin123' || password === 'admin'
@@ -38,16 +37,10 @@ export default function LoginPage() {
         login('admin', 'Super Administrator')
         navigate('/dashboard', { replace: true })
       } else {
-        setError('Invalid credentials. Default: admin / admin123')
+        setError('Invalid username or password. Please try again.')
         setIsLoading(false)
       }
     }, 400)
-  }
-
-  const quickFill = () => {
-    setUsername('admin')
-    setPassword('admin123')
-    setError('')
   }
 
   return (
@@ -80,7 +73,7 @@ export default function LoginPage() {
 
             <div>
               <label className="block text-xs sm:text-sm font-medium text-sap-text mb-1.5">
-                Admin Username
+                Username
               </label>
               <div className="relative">
                 <User size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sap-text-muted" />
@@ -88,7 +81,7 @@ export default function LoginPage() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="admin"
+                  placeholder="Enter username"
                   autoComplete="username"
                   className="w-full rounded-lg border border-sap-border bg-sap-bg py-2.5 pl-9 pr-3 text-xs sm:text-sm text-sap-text placeholder:text-sap-text-muted outline-none transition-colors focus:border-sap-primary focus:ring-2 focus:ring-sap-primary/20"
                 />
@@ -96,26 +89,16 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs sm:text-sm font-medium text-sap-text">
-                  Password
-                </label>
-                <button
-                  type="button"
-                  onClick={quickFill}
-                  className="inline-flex items-center gap-1 text-[11px] text-sap-primary hover:underline"
-                >
-                  <Sparkles size={12} />
-                  <span>Autofill Default</span>
-                </button>
-              </div>
+              <label className="block text-xs sm:text-sm font-medium text-sap-text mb-1.5">
+                Password
+              </label>
               <div className="relative">
                 <Lock size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sap-text-muted" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="Enter password"
                   autoComplete="current-password"
                   className="w-full rounded-lg border border-sap-border bg-sap-bg py-2.5 pl-9 pr-10 text-xs sm:text-sm text-sap-text placeholder:text-sap-text-muted outline-none transition-colors focus:border-sap-primary focus:ring-2 focus:ring-sap-primary/20"
                 />
@@ -140,15 +123,15 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          {/* Credentials Helper Callout */}
+          {/* Discreet Credentials Helper for Demo */}
           <div className="mt-6 rounded-xl border border-sap-border bg-sap-bg/60 p-3 text-xs text-sap-text-muted space-y-1">
             <div className="flex items-center gap-1.5 font-medium text-sap-text">
               <KeyRound size={14} className="text-sap-primary" />
-              <span>Default Credentials</span>
+              <span>Default Access</span>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[11px]">
-              <div>Username: <strong className="font-mono text-sap-primary">admin</strong></div>
-              <div>Password: <strong className="font-mono text-sap-primary">admin123</strong></div>
+            <div className="flex items-center justify-between text-[11px]">
+              <span>Username: <strong className="font-mono text-sap-text">admin</strong></span>
+              <span>Password: <strong className="font-mono text-sap-text">admin123</strong></span>
             </div>
           </div>
         </div>
