@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { Bell, UserCircle, Menu, ExternalLink, X } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Bell, UserCircle, Menu, ExternalLink, CheckCheck, X, LogOut } from 'lucide-react'
 import { useNotifications } from '../hooks/queries/useNotifications'
+import { useMarkAllNotificationsRead } from '../hooks/mutations/useMarkAllNotificationsRead'
+import { useAuth } from '../context/AuthContext'
 
 interface HeaderProps {
   onMenuClick: () => void
@@ -32,10 +34,14 @@ const pageTitles: Record<string, string> = {
 
 export default function Header({ onMenuClick }: HeaderProps) {
   const location = useLocation()
+  const navigate = useNavigate()
+  const { logout } = useAuth()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const { data } = useNotifications({ pageSize: 5, sortBy: 'createdAt', sortDir: 'desc' })
+  const { data } = useNotifications({ pageSize: 4, sortBy: 'createdAt', sortDir: 'desc' })
+  const markAllRead = useMarkAllNotificationsRead()
+
   const notifications = data?.data ?? []
   const unreadCount = data?.unreadCount ?? 0
 
@@ -55,8 +61,13 @@ export default function Header({ onMenuClick }: HeaderProps) {
     }
   }, [dropdownOpen])
 
+  const handleLogout = () => {
+    logout()
+    navigate('/login', { replace: true })
+  }
+
   return (
-    <header className="relative z-30 flex h-16 w-full items-center justify-between border-b border-sap-border bg-sap-navy px-3 sm:px-4 md:px-6">
+    <header className="sap-marble relative z-30 flex h-16 w-full items-center justify-between px-3 sm:px-4 md:px-6">
       <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
         <button
           onClick={onMenuClick}
@@ -65,12 +76,13 @@ export default function Header({ onMenuClick }: HeaderProps) {
         >
           <Menu size={22} />
         </button>
-        <h1 className="truncate text-sm sm:text-base md:text-lg font-semibold text-sap-primary">
+        <h1 className="truncate text-sm sm:text-base md:text-lg font-semibold text-[#FCE300]">
           {currentTitle}
         </h1>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+        {/* Notifications Bell with flyout */}
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
@@ -86,7 +98,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
           </button>
 
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-xl border border-sap-border bg-sap-surface p-3 shadow-2xl z-50">
+            <div className="absolute right-0 mt-2 w-[calc(100vw-1.5rem)] max-w-sm rounded-xl border border-sap-border bg-sap-surface p-3 shadow-2xl sm:w-96 z-50">
               <div className="flex items-center justify-between border-b border-sap-border pb-2.5">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-semibold text-sap-text">Recent Alerts</span>
@@ -96,12 +108,25 @@ export default function Header({ onMenuClick }: HeaderProps) {
                     </span>
                   )}
                 </div>
-                <button
-                  onClick={() => setDropdownOpen(false)}
-                  className="flex h-7 w-7 items-center justify-center rounded-md text-sap-text-muted hover:bg-sap-bg hover:text-white"
-                >
-                  <X size={16} />
-                </button>
+                <div className="flex items-center gap-1">
+                  {unreadCount > 0 && (
+                    <button
+                      onClick={() => markAllRead.mutate()}
+                      disabled={markAllRead.isPending}
+                      className="inline-flex items-center gap-1 text-xs text-sap-text-muted hover:text-sap-primary transition-colors"
+                      title="Mark all as read"
+                    >
+                      <CheckCheck size={14} />
+                      <span>Read all</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex h-7 w-7 items-center justify-center rounded-md text-sap-text-muted hover:bg-sap-bg hover:text-white"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
               </div>
 
               <div className="divide-y divide-sap-border/40 py-1 max-h-[60vh] overflow-y-auto sap-scroll">
@@ -109,11 +134,9 @@ export default function Header({ onMenuClick }: HeaderProps) {
                   <div className="py-6 text-center text-xs text-sap-text-muted">No notifications right now.</div>
                 ) : (
                   notifications.map((n) => (
-                    <Link
+                    <div
                       key={n.id}
-                      to="/notifications"
-                      onClick={() => setDropdownOpen(false)}
-                      className={`block p-2.5 transition-colors hover:bg-sap-bg/50 ${
+                      className={`p-2.5 transition-colors hover:bg-sap-bg/50 ${
                         n.status === 'Unread' ? 'bg-sap-bg/30' : ''
                       }`}
                     >
@@ -129,7 +152,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
                         </span>
                       </div>
                       <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-sap-text-muted">{n.message}</p>
-                    </Link>
+                    </div>
                   ))
                 )}
               </div>
@@ -148,9 +171,21 @@ export default function Header({ onMenuClick }: HeaderProps) {
           )}
         </div>
 
-        <div className="hidden items-center gap-2 text-sm sm:flex">
-          <UserCircle size={28} className="text-white/80" />
-          <span className="font-medium text-white">Super Admin</span>
+        {/* User profile & Logout */}
+        <div className="flex items-center gap-3">
+          <div className="hidden items-center gap-2 text-sm sm:flex">
+            <UserCircle size={28} className="text-white/80" />
+            <span className="font-medium text-white">Super Admin</span>
+          </div>
+
+          <button
+            onClick={handleLogout}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-sap-border bg-sap-surface/80 px-2.5 py-1.5 text-xs font-medium text-slate-300 hover:bg-sap-navy-light hover:text-white transition-colors"
+            title="Sign out of portal"
+          >
+            <LogOut size={14} />
+            <span className="hidden sm:inline">Sign Out</span>
+          </button>
         </div>
       </div>
     </header>

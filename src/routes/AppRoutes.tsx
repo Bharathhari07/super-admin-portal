@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import SuperAdminLayout from '../layouts/SuperAdminLayout'
+import ProtectedRoute from './ProtectedRoute'
+import LoginPage from '../pages/LoginPage'
 import DashboardPage from '../pages/DashboardPage'
 import TenantManagementPage from '../pages/TenantManagementPage'
 import OrganizationOverviewPage from '../pages/OrganizationOverviewPage'
@@ -24,30 +26,36 @@ import NotificationsPage from '../pages/NotificationsPage'
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<SuperAdminLayout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="tenants" element={<TenantManagementPage />} />
-        <Route path="organizations" element={<OrganizationOverviewPage />} />
-        <Route path="organizations/companies" element={<CompanySetupPage />} />
-        <Route path="organizations/business-units" element={<BusinessUnitsPage />} />
-        <Route path="organizations/departments" element={<DepartmentsPage />} />
-        <Route path="organizations/branches" element={<BranchesPage />} />
-        <Route path="organizations/cost-centers" element={<CostCentersPage />} />
-        <Route path="organizations/locations" element={<LocationsPage />} />
-        <Route path="users" element={<UserManagementPage />} />
-        <Route path="roles" element={<RolesPage />} />
-        <Route path="permissions" element={<PermissionsPage />} />
-        <Route path="role-assignments" element={<RoleAssignmentsPage />} />
-        <Route path="data-permissions" element={<DataPermissionsPage />} />
-        <Route path="platform-configuration" element={<PlatformConfigurationPage />} />
-        <Route path="feature-management" element={<FeatureManagementPage />} />
-        <Route path="license-management" element={<LicenseManagementPage />} />
-        <Route path="security" element={<SecurityPage />} />
-        <Route path="audit-logs" element={<AuditLogsPage />} />
-        <Route path="notifications" element={<NotificationsPage />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/login" element={<LoginPage />} />
+
+      {/* Protected Routes: requires login */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<SuperAdminLayout />}>
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="tenants" element={<TenantManagementPage />} />
+          <Route path="organizations" element={<OrganizationOverviewPage />} />
+          <Route path="organizations/companies" element={<CompanySetupPage />} />
+          <Route path="organizations/business-units" element={<BusinessUnitsPage />} />
+          <Route path="organizations/departments" element={<DepartmentsPage />} />
+          <Route path="organizations/branches" element={<BranchesPage />} />
+          <Route path="organizations/cost-centers" element={<CostCentersPage />} />
+          <Route path="organizations/locations" element={<LocationsPage />} />
+          <Route path="users" element={<UserManagementPage />} />
+          <Route path="roles" element={<RolesPage />} />
+          <Route path="permissions" element={<PermissionsPage />} />
+          <Route path="role-assignments" element={<RoleAssignmentsPage />} />
+          <Route path="data-permissions" element={<DataPermissionsPage />} />
+          <Route path="platform-configuration" element={<PlatformConfigurationPage />} />
+          <Route path="feature-management" element={<FeatureManagementPage />} />
+          <Route path="license-management" element={<LicenseManagementPage />} />
+          <Route path="security" element={<SecurityPage />} />
+          <Route path="audit-logs" element={<AuditLogsPage />} />
+          <Route path="notifications" element={<NotificationsPage />} />
+        </Route>
       </Route>
+
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   )
 }
