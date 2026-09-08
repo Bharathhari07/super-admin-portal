@@ -4,31 +4,48 @@ A multi-tenant administrative portal designed for enterprise SaaS governance, or
 
 ---
 
+## Default Access Credentials
+
+For demonstration and testing purposes, use the default administrator credentials on the login screen:
+
+| Field | Value |
+| :--- | :--- |
+| **Username** | `admin` |
+| **Password** | `admin123` |
+| **Assigned Role** | `Super Administrator` |
+
+---
+
 ## Key Modules & Capabilities
 
-### 1. Global Dashboard & Analytics
+### 1. Authentication & Route Protection
+- **Session Isolation**: Client-side session state management using React Context with local persistence.
+- **Route Guarding**: All administrative endpoints (`/dashboard`, `/tenants`, `/users`, etc.) require an active session; unauthorized requests redirect to `/login`.
+- **Global Sign Out**: Secure logout button in the top navigation header to terminate the session.
+
+### 2. Global Dashboard & Analytics
 - Multi-tenant health metrics (Active, Suspended, Inactive).
 - Resource usage indicators (Database, API Gateway, CPU, and Storage).
 - Interactive tenant and user growth trajectories using Recharts.
 - Live administrative activity stream.
 
-### 2. Tenant & Organization Hierarchy
+### 3. Tenant & Organization Hierarchy
 - **Tenant Management**: Tenant provisioning, tier assignment (Basic, Pro, Enterprise), and status toggling (Active/Suspended).
 - **Organizational Structure**: Multi-level organizational hierarchy covering Companies, Business Units, Departments, Branches, Cost Centers, and Locations.
 
-### 3. Identity, Access Management & RBAC
+### 4. Identity, Access Management & RBAC
 - **User Directory**: Centralized user management with status indicators, department assignments, and contact records.
 - **Roles & Permissions**: Fine-grained capability definitions and permission sets.
 - **Role Assignments**: Direct user-to-role mappings with organizational scope boundaries.
 - **Data Permissions**: Row- and column-level data scoping rules across business units.
 
-### 4. Platform Settings & Subscriptions
+### 5. Platform Settings & Subscriptions
 - **Platform Configuration**: Global system flags, session timeout parameters, and rate-limiting rules.
 - **Feature Management**: Modular feature flag toggles across tenant tiers.
 - **Subscription & Licensing**: Seat allocation, license key issuance, and renewal status tracking.
 - **Security Policies**: Multi-factor authentication (MFA) enforcement rules, IP throttling, and password complexity standards.
 
-### 5. Monitoring, Compliance & Audit
+### 6. Monitoring, Compliance & Audit
 - **Audit Logs**: Immutable event ledger tracking administrative operations, actor identity, IP addresses, affected entities, and before/after property diffs. CSV export capability included.
 - **Notifications & Alerts**: Category-based alerts (Security, System, Billing, Compliance) with priority tiers, unread counters, and inline action triggers.
 
