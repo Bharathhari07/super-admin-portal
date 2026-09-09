@@ -29,23 +29,29 @@ For demonstration and testing purposes, use the default administrator credential
 - Interactive tenant and user growth trajectories using Recharts.
 - Live administrative activity stream.
 
-### 3. Tenant & Organization Hierarchy
+### 3. Tenant Operations
+- **Batch Tenant Provisioning**: Bulk-import organization rosters into a target tenant workspace, with a running import history showing per-batch success and failure counts.
+- **Data Isolation & Recovery**: On-demand snapshot creation per tenant workspace, with point-in-time restore and a full snapshot history log.
+- **Platform Health & Alerts**: Publish and expire maintenance advisories and status banners, scoped to all tenants or a specific workspace, with severity tiers.
+- **Tenant Quotas & Billing**: Per-tenant seat, storage, and API usage tracking against plan limits, with invoice export and payment status management.
+
+### 4. Tenant & Organization Hierarchy
 - **Tenant Management**: Tenant provisioning, tier assignment (Basic, Pro, Enterprise), and status toggling (Active/Suspended).
 - **Organizational Structure**: Multi-level organizational hierarchy covering Companies, Business Units, Departments, Branches, Cost Centers, and Locations.
 
-### 4. Identity, Access Management & RBAC
+### 5. Identity, Access Management & RBAC
 - **User Directory**: Centralized user management with status indicators, department assignments, and contact records.
 - **Roles & Permissions**: Fine-grained capability definitions and permission sets.
 - **Role Assignments**: Direct user-to-role mappings with organizational scope boundaries.
 - **Data Permissions**: Row- and column-level data scoping rules across business units.
 
-### 5. Platform Settings & Subscriptions
+### 6. Platform Settings & Subscriptions
 - **Platform Configuration**: Global system flags, session timeout parameters, and rate-limiting rules.
 - **Feature Management**: Modular feature flag toggles across tenant tiers.
 - **Subscription & Licensing**: Seat allocation, license key issuance, and renewal status tracking.
 - **Security Policies**: Multi-factor authentication (MFA) enforcement rules, IP throttling, and password complexity standards.
 
-### 6. Monitoring, Compliance & Audit
+### 7. Monitoring, Compliance & Audit
 - **Audit Logs**: Immutable event ledger tracking administrative operations, actor identity, IP addresses, affected entities, and before/after property diffs. CSV export capability included.
 - **Notifications & Alerts**: Category-based alerts (Security, System, Billing, Compliance) with priority tiers, unread counters, and inline action triggers.
 
@@ -73,3 +79,4 @@ npm run dev
 
 # Compile production build
 npm run build
+```
