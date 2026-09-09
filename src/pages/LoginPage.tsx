@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ShieldCheck, Lock, User, Eye, EyeOff, ArrowRight, KeyRound } from 'lucide-react'
+import { ShieldCheck, Lock, User, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/common/Button'
 
@@ -45,12 +45,10 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-sap-bg px-4 py-8 relative overflow-hidden">
-      {/* Background Decorative Gradients */}
       <div className="pointer-events-none absolute -top-40 -left-40 h-96 w-96 rounded-full bg-sap-navy-light/40 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-sap-navy-light/30 blur-3xl" />
 
       <div className="w-full max-w-md space-y-6 relative z-10">
-        {/* Brand Header */}
         <div className="text-center space-y-2">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-sap-primary text-sap-navy shadow-lg ring-4 ring-sap-primary/20">
             <ShieldCheck size={32} />
@@ -61,7 +59,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Login Card */}
         <div className="rounded-2xl border border-sap-border bg-sap-surface p-6 sm:p-8 shadow-2xl backdrop-blur-sm">
           <form onSubmit={handleLogin} className="space-y-4 sm:space-y-5">
             {error && (
@@ -122,21 +119,8 @@ export default function LoginPage() {
               <ArrowRight size={16} />
             </Button>
           </form>
-
-          {/* Discreet Credentials Helper for Demo */}
-          <div className="mt-6 rounded-xl border border-sap-border bg-sap-bg/60 p-3 text-xs text-sap-text-muted space-y-1">
-            <div className="flex items-center gap-1.5 font-medium text-sap-text">
-              <KeyRound size={14} className="text-sap-primary" />
-              <span>Default Access</span>
-            </div>
-            <div className="flex items-center justify-between text-[11px]">
-              <span>Username: <strong className="font-mono text-sap-text">admin</strong></span>
-              <span>Password: <strong className="font-mono text-sap-text">admin123</strong></span>
-            </div>
-          </div>
         </div>
 
-        {/* Security badge footer */}
         <div className="text-center text-[11px] text-sap-text-muted">
           Protected by SOC 2 Type II Compliance & Session Isolation
         </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard,
@@ -77,6 +77,8 @@ interface SidebarProps {
   onClose?: () => void
 }
 
+type SectionKey = 'tenantOperations' | 'org' | 'access' | 'settings' | 'monitoring'
+
 export default function Sidebar({ onNavigate }: SidebarProps) {
   const location = useLocation()
   const currentPath = location.pathname
@@ -87,19 +89,34 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
   const isTenantOperationsActive = tenantOperationsItems.some((i) => currentPath.startsWith(i.to))
   const isMonitoringActive = monitoringItems.some((i) => currentPath.startsWith(i.to))
 
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>({
-    org: isOrgActive,
-    access: isAccessControlActive,
-    settings: isSettingsActive,
-    tenantOperations: true,
-    monitoring: isMonitoringActive,
-  })
+  // Whichever group contains the page you're currently viewing, or
+  // null if you're on a Core Administration page that belongs to no group.
+  const matchingSection: SectionKey | null = isOrgActive
+    ? 'org'
+    : isAccessControlActive
+      ? 'access'
+      : isSettingsActive
+        ? 'settings'
+        : isTenantOperationsActive
+          ? 'tenantOperations'
+          : isMonitoringActive
+            ? 'monitoring'
+            : null
 
-  function toggleSection(sectionKey: string) {
-    setOpenSections((prev) => ({
-      ...prev,
-      [sectionKey]: !prev[sectionKey],
-    }))
+  const [openSection, setOpenSection] = useState<SectionKey | null>(matchingSection)
+
+  // Every time the route changes - whether from clicking a link inside
+  // this sidebar or navigating any other way - only the group that
+  // actually contains the new page stays open; every other group closes.
+  useEffect(() => {
+    setOpenSection(matchingSection)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPath])
+
+  // Clicking a group's own header still toggles it open or closed
+  // without needing a navigation to trigger the change.
+  function toggleSection(sectionKey: SectionKey) {
+    setOpenSection((prev) => (prev === sectionKey ? null : sectionKey))
   }
 
   const linkClasses = (isActive: boolean) =>
@@ -152,9 +169,9 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
               <UploadCloud size={18} className="text-sap-primary" />
               <span>Tenant Operations</span>
             </div>
-            {openSections.tenantOperations ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
+            {openSection === 'tenantOperations' ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
           </button>
-          {openSections.tenantOperations && (
+          {openSection === 'tenantOperations' && (
             <div className="ml-3.5 space-y-1 border-l border-sap-navy-light pl-2.5 pt-1">
               {tenantOperationsItems.map(({ to, label, icon: Icon }) => (
                 <NavLink key={to} to={to} onClick={onNavigate} className={({ isActive }) => subLinkClasses(isActive)}>
@@ -179,9 +196,9 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
               <Network size={18} className="text-sap-primary" />
               <span>Organizations</span>
             </div>
-            {openSections.org ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
+            {openSection === 'org' ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
           </button>
-          {openSections.org && (
+          {openSection === 'org' && (
             <div className="ml-3.5 space-y-1 border-l border-sap-navy-light pl-2.5 pt-1">
               {orgSubItems.map(({ to, label, icon: Icon }) => (
                 <NavLink key={to} to={to} onClick={onNavigate} className={({ isActive }) => subLinkClasses(isActive)}>
@@ -206,9 +223,9 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
               <RolesIcon size={18} className="text-sap-primary" />
               <span>Access Control</span>
             </div>
-            {openSections.access ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
+            {openSection === 'access' ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
           </button>
-          {openSections.access && (
+          {openSection === 'access' && (
             <div className="ml-3.5 space-y-1 border-l border-sap-navy-light pl-2.5 pt-1">
               {accessControlItems.map(({ to, label, icon: Icon }) => (
                 <NavLink key={to} to={to} onClick={onNavigate} className={({ isActive }) => subLinkClasses(isActive)}>
@@ -233,9 +250,9 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
               <Sliders size={18} className="text-sap-primary" />
               <span>Platform Settings</span>
             </div>
-            {openSections.settings ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
+            {openSection === 'settings' ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
           </button>
-          {openSections.settings && (
+          {openSection === 'settings' && (
             <div className="ml-3.5 space-y-1 border-l border-sap-navy-light pl-2.5 pt-1">
               {platformSettingsItems.map(({ to, label, icon: Icon }) => (
                 <NavLink key={to} to={to} onClick={onNavigate} className={({ isActive }) => subLinkClasses(isActive)}>
@@ -260,9 +277,9 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
               <FileText size={18} className="text-sap-primary" />
               <span>Compliance & Logs</span>
             </div>
-            {openSections.monitoring ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
+            {openSection === 'monitoring' ? <ChevronDown size={15} /> : <ChevronRight size={15} />}
           </button>
-          {openSections.monitoring && (
+          {openSection === 'monitoring' && (
             <div className="ml-3.5 space-y-1 border-l border-sap-navy-light pl-2.5 pt-1">
               {monitoringItems.map(({ to, label, icon: Icon }) => (
                 <NavLink key={to} to={to} onClick={onNavigate} className={({ isActive }) => subLinkClasses(isActive)}>

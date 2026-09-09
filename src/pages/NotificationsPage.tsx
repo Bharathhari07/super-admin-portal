@@ -141,8 +141,8 @@ export default function NotificationsPage() {
           </div>
         </div>
 
-        <div className="overflow-x-auto rounded-lg border border-sap-border">
-          <table className="w-full text-left text-sm">
+        <div className="overflow-x-auto rounded-lg border border-sap-border sap-scroll">
+          <table className="w-full min-w-[780px] text-left text-sm">
             <thead className="border-b border-sap-border bg-sap-bg text-xs font-semibold text-sap-text-muted">
               <tr>
                 <th className="px-4 py-3">Alert</th>
