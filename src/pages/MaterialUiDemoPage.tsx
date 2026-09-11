@@ -9,11 +9,18 @@ import {
   MenuItem,
   Chip,
   Paper,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button as MuiButton,
+  Typography,
+  Divider,
 } from '@mui/material'
-import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid'
+import { DataGrid, type GridColDef, type GridRenderCellParams, type GridRowParams } from '@mui/x-data-grid'
 import { muiTheme } from '../theme/muiTheme'
 import { dummyCompanies } from '../data/dummyCompanies'
-import type { CompanyStatus } from '../types/company'
+import type { Company, CompanyStatus } from '../types/company'
 
 function statusColor(status: CompanyStatus): 'success' | 'default' | 'warning' {
   if (status === 'Active') return 'success'
@@ -43,9 +50,19 @@ const columns: GridColDef[] = [
   { field: 'createdAt', headerName: 'Created', width: 130 },
 ]
 
+function DetailRow({ label, value }: { label: string; value: string }) {
+  return (
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', py: 0.75 }}>
+      <Typography variant="body2" sx={{ color: '#a29fb0' }}>{label}</Typography>
+      <Typography variant="body2" sx={{ color: '#f1f0f5', fontWeight: 500 }}>{value || '-'}</Typography>
+    </Box>
+  )
+}
+
 export default function MaterialUiDemoPage() {
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<CompanyStatus | 'All'>('All')
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null)
 
   const rows = useMemo(() => {
     return dummyCompanies
@@ -99,13 +116,56 @@ export default function MaterialUiDemoPage() {
             pageSizeOptions={[5, 10]}
             disableRowSelectionOnClick
             autoHeight
+            onRowClick={(params: GridRowParams) => setSelectedCompany(params.row as Company)}
             sx={{
               border: '1px solid #332755',
               borderRadius: 2,
               backgroundColor: '#1c1030',
+              '& .MuiDataGrid-row': { cursor: 'pointer' },
             }}
           />
         </Paper>
+
+        <Dialog
+          open={Boolean(selectedCompany)}
+          onClose={() => setSelectedCompany(null)}
+          maxWidth="sm"
+          fullWidth
+          slotProps={{ paper: { sx: { backgroundColor: '#1c1030', border: '1px solid #332755', borderRadius: 3 } } }}
+        >
+          {selectedCompany && (
+            <>
+              <DialogTitle sx={{ color: '#f1f0f5', fontWeight: 700 }}>
+                {selectedCompany.companyName}
+                <Typography variant="body2" sx={{ color: '#a29fb0', mt: 0.5 }}>
+                  {selectedCompany.legalCompanyName}
+                </Typography>
+              </DialogTitle>
+              <DialogContent dividers sx={{ borderColor: '#332755' }}>
+                <DetailRow label="Company Code" value={selectedCompany.companyCode} />
+                <DetailRow label="Entity Type" value={selectedCompany.legalEntityType} />
+                <DetailRow label="Industry" value={selectedCompany.industry} />
+                <DetailRow label="Registration Number" value={selectedCompany.registrationNumber} />
+                <DetailRow label="Tax ID" value={selectedCompany.taxId} />
+                <Divider sx={{ my: 1.5, borderColor: '#332755' }} />
+                <DetailRow label="Contact Person" value={selectedCompany.primaryContactPerson} />
+                <DetailRow label="Email" value={selectedCompany.email} />
+                <DetailRow label="Mobile" value={selectedCompany.mobile} />
+                <DetailRow label="Website" value={selectedCompany.website} />
+                <Divider sx={{ my: 1.5, borderColor: '#332755' }} />
+                <DetailRow
+                  label="Address"
+                  value={`${selectedCompany.addressLine1}, ${selectedCompany.city}, ${selectedCompany.state}, ${selectedCompany.country}`}
+                />
+                <DetailRow label="Currency" value={selectedCompany.defaultCurrency} />
+                <DetailRow label="Time Zone" value={selectedCompany.timeZone} />
+              </DialogContent>
+              <DialogActions>
+                <MuiButton onClick={() => setSelectedCompany(null)}>Close</MuiButton>
+              </DialogActions>
+            </>
+          )}
+        </Dialog>
       </ThemeProvider>
     </div>
   )
