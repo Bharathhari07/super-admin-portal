@@ -60,9 +60,9 @@ export default function MaterialUiDemoPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-xl font-semibold text-sap-text">Company Directory (Material UI)</h2>
+        <h2 className="text-xl font-semibold text-sap-text">Company Directory</h2>
         <p className="text-sm text-sap-text-muted">
-          Company Setup data rendered with MUI DataGrid and form components, inside the existing Tailwind layout.
+          Company records with sortable, filterable data grid view.
         </p>
       </div>
 
@@ -107,18 +107,6 @@ export default function MaterialUiDemoPage() {
           />
         </Paper>
       </ThemeProvider>
-
-      <div className="rounded-xl border border-sap-border bg-sap-surface p-4 text-sm text-sap-text-muted">
-        <p className="mb-1 font-semibold text-sap-text">MUI + Tailwind coexistence notes</p>
-        <p>
-          Both libraries work in the same project without conflict as long as MUI's <code>CssBaseline</code> component
-          is not added globally - that component resets base HTML element styles the same way Tailwind's own preflight
-          does, and applying both at once causes one to override the other unpredictably. Scoping the MUI
-          <code>ThemeProvider</code> to just the components that need it (as done on this page) avoids that entirely:
-          Tailwind continues to control page layout and spacing, MUI handles its own components' internal styling, and
-          neither touches the other's DOM.
-        </p>
-      </div>
     </div>
   )
 }
