@@ -26,6 +26,7 @@ import LicenseManagementPage from '../pages/LicenseManagementPage'
 import SecurityPage from '../pages/SecurityPage'
 import AuditLogsPage from '../pages/AuditLogsPage'
 import NotificationsPage from '../pages/NotificationsPage'
+import MaterialUiDemoPage from '../pages/MaterialUiDemoPage'
 
 export default function AppRoutes() {
   return (
@@ -66,6 +67,8 @@ export default function AppRoutes() {
 
           <Route path="audit-logs" element={<AuditLogsPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
+
+          <Route path="material-ui-demo" element={<MaterialUiDemoPage />} />
         </Route>
       </Route>
 
